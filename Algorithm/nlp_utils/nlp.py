@@ -6,6 +6,7 @@ __all__ = (
     "remove_punct",
     "remove_noise",
     "lemmatize",
+    "stem",
 )
 
 def standartize(df):
@@ -76,6 +77,24 @@ def lemmatize(df):
             words = nltk.word_tokenize(sents[j])
             for k in range(len(words)):
                 words[k] = lemmatizer.lemmatize(words[k])
+                
+            sents[j] = " ".join(words)
+        
+        text = " ".join(sents)
+        df.iloc[i]["text"] = text
+
+
+def stem(df):
+    stemmer = nltk.PorterStemmer()
+    
+    for i in range(len(df)):
+        text = df.iloc[i]["text"].lower()
+        sents = nltk.sent_tokenize(text)
+        
+        for j in range(len(sents)):
+            words = nltk.word_tokenize(sents[j])
+            for k in range(len(words)):
+                words[k] = stemmer.stem(words[k])
                 
             sents[j] = " ".join(words)
         
