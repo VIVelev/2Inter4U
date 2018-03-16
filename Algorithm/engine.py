@@ -1,6 +1,7 @@
 from tkinter import *
 
 from main.methods import predict_emotion
+from nlp_utils.methods import preprocess
 
 xx=0
 umsg=[]
@@ -44,8 +45,10 @@ class BotBubble:
 
 	def recommend (self):
 		global umsg
-		msg = umsg[-1]
-		return predict_emotion(msg)
+		last_msg = umsg[-1]
+		X_tf = preprocess(last_msg)
+		return predict_emotion(X_tf)
+
 
 '''master=Tk()
 a=UserBubble(master,"input")
