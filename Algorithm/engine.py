@@ -1,10 +1,9 @@
 from tkinter import *
 
 from main.methods import predict_emotion
-from nlp_utils.methods import preprocess
+from nlp_utils.methods import preprocess, summarize_article
 
 import wikipedia
-from gensim.summarization.summarizer import summarize
 
 xx=0
 umsg=[]
@@ -51,9 +50,8 @@ class BotBubble:
 		# last_msg = umsg[-1]
 		# X_tf = preprocess(last_msg)
 		# return predict_emotion(X_tf)
-
 	
-		return summarize(summarize(summarize(wikipedia.page(wikipedia.search("Penis")[0]).content)))
+		return summarize_article(wikipedia.page("Bulgaria").content)
 
 
 '''master=Tk()
