@@ -7,8 +7,8 @@ class Chat :
     def __init__(self,master) :
         self.master = master
         self.master.title("Chat")
-        self.c=Canvas(master,borderwidth=0,background="#ffffff",width=600,height=500)
-        self.frame=Frame(self.c,background="#ffffff")
+        self.c=Canvas(master,borderwidth=0,background="#ffffff",width=400,height=400)
+        self.frame=Frame(self.c,background="#ffffff",width=400,height=400)
         self.sc=Scrollbar(master,orient="vertical",command=self.c.yview)
         self.c.configure(yscrollcommand=self.sc.set)
         self.sc.pack(side="right",fill="y")
