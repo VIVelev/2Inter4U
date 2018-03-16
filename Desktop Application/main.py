@@ -15,6 +15,11 @@ photo_history=PhotoImage(file="hstic.png", height=100, width=100)
 history_button.config(image=photo_history,width=100, height=100)
 history_button.place(x=850, y=140)
 
+fav_button = Button(root, justify = RIGHT)
+fav_photo=PhotoImage(file="favic.png", height=100, width=100)
+fav_button.config(image=fav_photo, width=100, height=100)
+fav_button.place(x=850, y=260)
+
 
 
 root.mainloop()
