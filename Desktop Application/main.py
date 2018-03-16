@@ -1,6 +1,7 @@
 from tkinter import *
 root=Tk()
 
+
 root.geometry('1000x500')
 logo = PhotoImage(file="ht1.png")
 background=Label(root, image=logo).place(x=0,y=0,relwidth=1, relheight=1)
@@ -10,7 +11,7 @@ chat_photo=PhotoImage(file="chat1.png", width=80, height=80)
 chat_button.config(image=chat_photo, width=80, height=80)
 chat_button.place(x=835, y=50)
 
-history_button = Button(root, justify = RIGHT)
+history_button = Button(root, justify = RIGHT, bg="#b0966b")
 history_photo=PhotoImage(file="hstic.png", width=50, height=50)
 history_button.config(image=history_photo, width=50, height=50)
 history_button.place(x=850, y=180)
