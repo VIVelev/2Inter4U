@@ -3,3 +3,5 @@ numpy
 scipy
 nltk
 scikit-learn
+wikipedia
+gensim

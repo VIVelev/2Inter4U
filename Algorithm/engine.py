@@ -3,6 +3,9 @@ from tkinter import *
 from main.methods import predict_emotion
 from nlp_utils.methods import preprocess
 
+import wikipedia
+from gensim.summarization.summarizer import summarize
+
 xx=0
 umsg=[]
 bmsg=[]
@@ -44,10 +47,13 @@ class BotBubble:
 		xx+=20
 
 	def recommend (self):
-		global umsg
-		last_msg = umsg[-1]
-		X_tf = preprocess(last_msg)
-		return predict_emotion(X_tf)
+		# global umsg
+		# last_msg = umsg[-1]
+		# X_tf = preprocess(last_msg)
+		# return predict_emotion(X_tf)
+
+	
+		return summarize(summarize(summarize(wikipedia.page(wikipedia.search("Penis")[0]).content)))
 
 
 '''master=Tk()
