@@ -7,7 +7,7 @@ __all__ = [
     "DIR"
 ]
 
-DIR = "/Users/victor/Desktop/OldAndBald/Algorithm/data/"
+DIR = "/Users/victor/Desktop/OldAndBald/app/data/"
 
 def text2array(file, DIR=DIR, is_yelp=False):
     res = []

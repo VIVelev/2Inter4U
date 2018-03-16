@@ -8,6 +8,7 @@ from nlp_utils.methods import (
 )
 
 import wikipedia
+import re
 
 roww=0
 umsg=[]
@@ -41,16 +42,17 @@ class BotBubble:
 		self.l2.pack(fill="x")
 		roww+=1
 
-	def recommend (self):
+
+	def recommend(self):
 		global umsg
 		
 		if named_entity_recognition(umsg[-1]):
 			topics = named_entity_recognition(umsg[-1])
-			return summarize_article(
-					wikipedia.page(
-						wikipedia.search(topics[0])[0]
-					).content
-				)
+			print(topics)
+
+			article = wikipedia.page(wikipedia.search(topics[0])[0]).content
+			response = summarize_article(article)
+			return response
 
 		else:
 			last_msg = umsg[-1]
