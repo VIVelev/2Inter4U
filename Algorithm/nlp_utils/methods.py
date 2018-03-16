@@ -31,5 +31,16 @@ def summarize_article(text):
     return summarize(summarize(summarize(text)))
 
 def named_entity_recognition(text):
-    pass
+    data = nltk.word_tokenize(text)
+    data = nltk.pos_tag(data)
+    data = nltk.ne_chunk(data)
+    data = list(data)
+    
+    final = []
+    
+    for x in data:
+        if type(x) is nltk.tree.Tree:
+            final.append(x[0][0])
+            
+    return final
 

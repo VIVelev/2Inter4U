@@ -1,7 +1,7 @@
 from tkinter import *
 
 from main.methods import predict_emotion
-from nlp_utils.methods import preprocess, summarize_article
+from nlp_utils.methods import preprocess, summarize_article, named_entity_recognition
 
 import wikipedia
 
@@ -46,14 +46,17 @@ class BotBubble:
 		xx+=20
 
 	def recommend (self):
-		if 
+		global umsg
+		
+		if named_entity_recognition(umsg[-1]):
+			topics = named_entity_recognition(umsg[-1])
+			return summarize_article(wikipedia.page(topics[0]).content)
 
-		# global umsg
-		# last_msg = umsg[-1]
-		# X_tf = preprocess(last_msg)
-		# return predict_emotion(X_tf)
+		else:
+			last_msg = umsg[-1]
+			X_tf = preprocess(last_msg)
+			return predict_emotion(X_tf)
 	
-		return summarize_article(wikipedia.page("Bulgaria").content)
 
 
 '''master=Tk()
