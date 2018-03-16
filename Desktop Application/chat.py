@@ -13,6 +13,8 @@ class Chat :
         self.text_box.pack( side = tkinter.BOTTOM, padx = 100 , pady = 40)
 
 master = Tk()
+a = UserBubble(master, "sami e mnogo gotin kappa")
+
 master.minsize(width = 600,height = 700)
 master.maxsize(width = 600, height = 700)
 a = Chat(master)
