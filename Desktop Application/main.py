@@ -6,19 +6,25 @@ logo = PhotoImage(file="ht.png")
 background=Label(root, image=logo).place(x=0,y=0,relwidth=1, relheight=1)
 
 chat_button=Button(root,justify = LEFT)
-photo_chat=PhotoImage(file="chat1.png", height=100, width=100)
-chat_button.config(image=photo_chat,width=100,height=100)
+chat_photo=PhotoImage(file="chat1.png", width=50, height=50)
+chat_button.config(image=chat_photo, width=50, height=50)
 chat_button.place(x=850, y=20)
 
 history_button = Button(root, justify = RIGHT)
-photo_history=PhotoImage(file="hstic.png", height=100, width=100)
-history_button.config(image=photo_history,width=100, height=100)
+history_photo=PhotoImage(file="hstic.png", width=50, height=50)
+history_button.config(image=history_photo, width=50, height=50)
 history_button.place(x=850, y=140)
 
 fav_button = Button(root, justify = RIGHT)
-fav_photo=PhotoImage(file="favic.png", height=100, width=100)
-fav_button.config(image=fav_photo, width=100, height=100)
+fav_photo=PhotoImage(file="favic.png", width=50, height=50)
+fav_button.config(image=fav_photo, width=50, height=50)
 fav_button.place(x=850, y=260)
+
+aboutus_button = Button(root)
+aboutus_photo = PhotoImage(file="aboutus.png", width=50, height=50)
+aboutus_button.config(image=aboutus_photo, width=50, height=50)
+aboutus_button.place(x=850, y=380)
+
 
 
 
