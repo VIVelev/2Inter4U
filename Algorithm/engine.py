@@ -1,7 +1,7 @@
 from tkinter import *
 
-from Algorithm.main.methods import predict_emotion
-from Algorithm.nlp_utils.methods import preprocess
+from main.methods import predict_emotion
+from nlp_utils.methods import preprocess
 
 xx=0
 umsg=[]
