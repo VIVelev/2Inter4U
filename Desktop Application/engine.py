@@ -1,5 +1,7 @@
 from tkinter import *
 
+from algo.methods import predict_emotion
+
 xx=0
 umsg=[]
 bmsg=[]
@@ -41,7 +43,7 @@ class BotBubble:
 		xx+=20
 
 	def recommend (self):
-		return "Test"
+		return predict_emotion()
 
 '''master=Tk()
 a=UserBubble(master,"input")
