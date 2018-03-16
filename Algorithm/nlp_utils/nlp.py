@@ -5,6 +5,7 @@ __all__ = (
     "standartize",
     "remove_punct",
     "remove_noise",
+    "lemmatize",
 )
 
 def standartize(df):
@@ -63,3 +64,20 @@ def remove_noise(df):
         text = " ".join(sents)
         df.iloc[i]["text"] = remove_punct(text)
         df.iloc[i]["label"] = remove_punct(df.iloc[i]["label"])
+
+def lemmatize(df):
+    lemmatizer = nltk.WordNetLemmatizer()
+    
+    for i in range(len(df)):
+        text = df.iloc[i]["text"].lower()
+        sents = nltk.sent_tokenize(text)
+        
+        for j in range(len(sents)):
+            words = nltk.word_tokenize(sents[j])
+            for k in range(len(words)):
+                words[k] = lemmatizer.lemmatize(words[k])
+                
+            sents[j] = " ".join(words)
+        
+        text = " ".join(sents)
+        df.iloc[i]["text"] = text
