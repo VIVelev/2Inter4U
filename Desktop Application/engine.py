@@ -15,10 +15,10 @@ class UserBubble:
 		self.l1.pack(fill="x")
 		self.l2=Label(master,text=content+"\n",anchor="w")
 		self.l2.place(x=xx+10,y=0)
-		self.l2.pack()
-		self.l3=Label(master,text="",anchor="w",bg="red")
-		self.l3.place(x=xx,y=0)
-		self.l3.pack(fill="x")
+		self.l2.pack(fill="x")
+	#	self.l3=Label(master,text="",anchor="w",bg="red")
+	#	self.l3.place(x=xx,y=0)
+	#	self.l3.pack(fill="x")
 		xx+=20
 
 class BotBubble:
@@ -32,10 +32,10 @@ class BotBubble:
 		self.l1.pack(fill="x")
 		self.l2=Label(master,text=content+"\n",anchor="w")
 		self.l2.place(x=xx+10,y=0)
-		self.l2.pack(fill="both")
-		self.l3=Label(master,text="",anchor="w",bg="blue")
-		self.l3.place(x=xx,y=0)
-		self.l3.pack(fill="x")
+		self.l2.pack(fill="x")
+	#	self.l3=Label(master,text="",anchor="w",bg="blue")
+	#	self.l3.place(x=xx,y=0)
+	#	self.l3.pack(fill="x")
 		xx+=20
 
 def recommend (master):
