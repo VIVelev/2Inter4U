@@ -2,7 +2,7 @@ from tkinter import *
 root=Tk()
 
 root.geometry('1000x500')
-logo = PhotoImage(file="ht.png")
+logo = PhotoImage(file="ht1.png")
 background=Label(root, image=logo).place(x=0,y=0,relwidth=1, relheight=1)
 
 chat_button=Button(root,justify = LEFT)
