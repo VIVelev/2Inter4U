@@ -41,7 +41,7 @@ class BotBubble:
 		xx+=20
 
 	def recommend (self):
-		return "Test"
+		return "Hello"
 
 '''master=Tk()
 a=UserBubble(master,"input")
