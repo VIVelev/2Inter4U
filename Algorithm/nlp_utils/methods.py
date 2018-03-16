@@ -1,5 +1,6 @@
 import pickle
 import pandas as pd
+import nltk
 
 from .nlp import *
 from gensim.summarization.summarizer import summarize
@@ -8,6 +9,7 @@ from gensim.summarization.summarizer import summarize
 __all__ = [
     "preprocess",
     "summarize_article"
+    "named_entity_recognition",
 ]
 
 tf_idf = pickle.load(open("./nlp_utils/tf_idf.pickle", "rb"))
@@ -27,4 +29,7 @@ def preprocess(text):
 
 def summarize_article(text):
     return summarize(summarize(summarize(text)))
+
+def named_entity_recognition(text):
+    pass
 

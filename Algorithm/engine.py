@@ -46,6 +46,8 @@ class BotBubble:
 		xx+=20
 
 	def recommend (self):
+		if 
+
 		# global umsg
 		# last_msg = umsg[-1]
 		# X_tf = preprocess(last_msg)
