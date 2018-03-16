@@ -37,3 +37,5 @@ def main():
     master.maxsize(width = 600, height = 700)
     a = Chat(master)
     master.mainloop()
+
+main()
