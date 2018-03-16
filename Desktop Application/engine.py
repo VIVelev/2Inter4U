@@ -20,17 +20,19 @@ class UserBubble:
 	#	self.l3.place(x=xx,y=0)
 	#	self.l3.pack(fill="x")
 		xx+=20
+		b=BotBubble(master)
 
 class BotBubble:
-	def __init__(self,master,content):
+	def __init__(self,master):
 		global xx
 		global umsg
 		global bmsg
-		bmsg.append(content)
+		self.content=self.recommend()
+		bmsg.append(self.content)
 		self.l1=Label(master,text="Bot:",anchor="w",fg="blue")
 		self.l1.place(x=xx,y=0)
 		self.l1.pack(fill="x")
-		self.l2=Label(master,text=content,anchor="w")
+		self.l2=Label(master,text=self.content,anchor="w")
 		self.l2.place(x=xx+10,y=0)
 		self.l2.pack(fill="x")
 	#	self.l3=Label(master,text="",anchor="w",bg="blue")
@@ -38,8 +40,8 @@ class BotBubble:
 	#	self.l3.pack(fill="x")
 		xx+=20
 
-def recommend (master):
-	pass
+	def recommend (self):
+		return "Test"
 
 '''master=Tk()
 a=UserBubble(master,"input")
