@@ -39,7 +39,7 @@ def named_entity_recognition(text):
     named_entities = []
     
     for x in data:
-        if type(x) is nltk.tree.Tree:
+        if type(x) is nltk.tree.Tree: # if Named Entity
             named_entities.append(x[0][0])
             
     return named_entities
