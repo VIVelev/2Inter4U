@@ -9,45 +9,37 @@ from nlp_utils.methods import (
 
 import wikipedia
 
-xx=0
+roww=0
 umsg=[]
 bmsg=[]
 
 class UserBubble:
-	def __init__(self,master,content):
-		global xx
+	def __init__(self,frame,content):
+		global roww
 		global umsg
 		global bmsg
 		umsg.append(content)
-		self.l1=Label(master,text="Me:",anchor="w",fg="red")
-		self.l1.place(x=xx,y=0)
+		self.l1=Label(frame,text="Me:",anchor="w",fg="red",width=600)#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
-		self.l2=Label(master,text=content,anchor="w")
-		self.l2.place(x=xx+10,y=0)
+		roww+=1
+		self.l2=Label(frame,text=content,anchor="w")#.grid(row=roww,column=0)
 		self.l2.pack(fill="x")
-	#	self.l3=Label(master,text="",anchor="w",bg="red")
-	#	self.l3.place(x=xx,y=0)
-	#	self.l3.pack(fill="x")
-		xx+=20
-		b=BotBubble(master)
+		roww+=1
+		b=BotBubble(frame)
 
 class BotBubble:
-	def __init__(self,master):
-		global xx
+	def __init__(self,frame):
+		global roww
 		global umsg
 		global bmsg
 		self.content=self.recommend()
 		bmsg.append(self.content)
-		self.l1=Label(master,text="Bot:",anchor="w",fg="blue")
-		self.l1.place(x=xx,y=0)
+		self.l1=Label(frame,text="Bot:",anchor="w",fg="blue")#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
-		self.l2=Label(master,text=self.content,anchor="w")
-		self.l2.place(x=xx+10,y=0)
+		roww+=1
+		self.l2=Label(frame,text=self.content,anchor="w")#.grid(row=roww,column=0)
 		self.l2.pack(fill="x")
-	#	self.l3=Label(master,text="",anchor="w",bg="blue")
-	#	self.l3.place(x=xx,y=0)
-	#	self.l3.pack(fill="x")
-		xx+=20
+		roww+=1
 
 	def recommend (self):
 		global umsg
