@@ -36,11 +36,11 @@ def named_entity_recognition(text):
     data = nltk.ne_chunk(data)
     data = list(data)
     
-    final = []
+    named_entities = []
     
     for x in data:
         if type(x) is nltk.tree.Tree:
-            final.append(x[0][0])
+            named_entities.append(x[0][0])
             
-    return final
+    return named_entities
 

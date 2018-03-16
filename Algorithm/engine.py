@@ -1,7 +1,11 @@
 from tkinter import *
 
 from main.methods import predict_emotion
-from nlp_utils.methods import preprocess, summarize_article, named_entity_recognition
+from nlp_utils.methods import (
+	preprocess,
+	summarize_article,
+	named_entity_recognition
+)
 
 import wikipedia
 
@@ -50,14 +54,17 @@ class BotBubble:
 		
 		if named_entity_recognition(umsg[-1]):
 			topics = named_entity_recognition(umsg[-1])
-			return summarize_article(wikipedia.page(topics[0]).content)
+			return summarize_article(
+					wikipedia.page(
+						wikipedia.search(topics[0])[0]
+					).content
+				)
 
 		else:
 			last_msg = umsg[-1]
 			X_tf = preprocess(last_msg)
 			return predict_emotion(X_tf)
 	
-
 
 '''master=Tk()
 a=UserBubble(master,"input")
