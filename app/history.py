@@ -26,7 +26,7 @@ while True:
 #    print (i,type(i))
     jk = string + i
     label = tk.Label(frame,text=jk,width=85,background = "wheat4")
-    label.pack(pady = 50)
+    label.pack(pady = 30)
     labels.append(label)
 master.minsize(width = 600,height = 700)
 master.maxsize(width = 600, height = 700)
