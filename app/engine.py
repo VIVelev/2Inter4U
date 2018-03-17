@@ -13,6 +13,7 @@ from main.methods import (
 from nlp_utils.methods import (
 	preprocess,
 	summarize_article,
+	summarize_categories,
 	named_entity_recognition,
 )
 
@@ -72,6 +73,7 @@ class BotBubble:
 		global DATASET
 		global WIKI_TAGS
 		global WIKI_PAGES
+
 		global umsg
 		global bmsg
 		
@@ -79,7 +81,7 @@ class BotBubble:
 		response = ""
 
 		if len(topics) > 0:
-			print(topics)
+			print("\nRecognized topics:" + str(topics))
 
 			if len(WIKI_PAGES) == 0:
 				page = wikipedia.page(wikipedia.search(topics[0])[0])
@@ -95,7 +97,8 @@ class BotBubble:
 				stem(CURRENT_TAGS)
 
 				X_train, y_train = CURRENT_TAGS["text"], CURRENT_TAGS["label"]
-				print(X_train, y_train)
+				print(X_train)
+				print(y_train)
 
 				response = "HELLO"
 
@@ -105,10 +108,16 @@ class BotBubble:
 			X_tf = preprocess(last_umsg)
 			label = predict_emotion(X_tf)
 
+			last_article_categories = ". ".join(WIKI_PAGES[-1].categories)
+			# print(last_article_categories)
+
 			WIKI_TAGS = WIKI_TAGS.append(
 				pd.DataFrame(
 					[
-						[" ".join(WIKI_PAGES[-1].categories), label]
+						[
+							summarize_categories(last_article_categories),
+							label
+						]
 					],
 					columns=["category", "label"]
 				),
@@ -123,7 +132,8 @@ class BotBubble:
 		else:
 			pass
 
-		print(WIKI_TAGS)		
+		print("\nWIKI_TAGS" + str(WIKI_TAGS))
+		print("\nDATASET" + str(DATASET))						
 		return response
 
 

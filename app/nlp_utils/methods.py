@@ -9,7 +9,8 @@ from .nlp import *
 
 __all__ = [
     "preprocess",
-    "summarize_article"
+    "summarize_article",
+    "summarize_categories",
     "named_entity_recognition",
 ]
 
@@ -30,6 +31,9 @@ def preprocess(text):
 
 def summarize_article(text):
     return summarize(summarize(summarize(text)))
+
+def summarize_categories(text):
+    return summarize(summarize(text))
 
 def named_entity_recognition(text):
     data = nltk.word_tokenize(text)

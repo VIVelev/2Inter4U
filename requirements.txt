@@ -6,3 +6,4 @@ scikit-learn
 wikipedia
 gensim
 pillow
+elasticsearch
