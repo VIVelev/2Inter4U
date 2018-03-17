@@ -22,7 +22,7 @@ from elastic_search.main import (
 )
 
 DATASET = pd.DataFrame(columns=["text", "label"])
-WIKI_TAGS = pd.DataFrame(columns=["text", "label"])
+# WIKI_TAGS = pd.DataFrame(columns=["text", "label"])
 WIKI_PAGES = []
 
 es = init_index()
@@ -101,22 +101,6 @@ class BotBubble:
 			X_tf = preprocess(last_umsg)
 			label = predict_emotion(X_tf)
 
-			last_article_categories = ". ".join(WIKI_PAGES[-1].categories)
-			# print(last_article_categories)
-
-			WIKI_TAGS = WIKI_TAGS.append(
-				pd.DataFrame(
-					[
-						[
-							summarize_categories(last_article_categories),
-							label
-						]
-					],
-					columns=["text", "label"]
-				),
-				ignore_index=True
-			)
-
 			DATASET = DATASET.append(
 				pd.DataFrame(
 					[[bmsg[-1], label]],
@@ -124,12 +108,28 @@ class BotBubble:
 				),
 				ignore_index=True
 			)
+
+			# last_article_categories = ". ".join(WIKI_PAGES[-1].categories)
+			# print(last_article_categories)
+
+			# WIKI_TAGS = WIKI_TAGS.append(
+			# 	pd.DataFrame(
+			# 		[
+			# 			[
+			# 				summarize_categories(last_article_categories),
+			# 				label
+			# 			]
+			# 		],
+			# 		columns=["text", "label"]
+			# 	),
+			# 	ignore_index=True
+			# )
 		
 		else:
 			pass
 
-		print("\nWIKI_TAGS" + str(WIKI_TAGS))
-		print("\nDATASET" + str(DATASET))						
+		print("\nDATASET\n" + str(DATASET))	
+		# print("\nWIKI_TAGS" + str(WIKI_TAGS))							
 		return response
 
 

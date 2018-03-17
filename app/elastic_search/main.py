@@ -14,7 +14,8 @@ def init_index(INDEX_NAME="chatbot"):
         print(" response: '%s'" % (res))
 
     request_body = {
-        "settings": {
+        "settings" : {
+            "number_of_shards" : 1,
             "analysis": {
                 "filter": {
                     "english_stop": {
@@ -36,7 +37,7 @@ def init_index(INDEX_NAME="chatbot"):
                 },
                 "analyzer": {
                     "english": {
-                        "tokenizer": "standard",
+                        "tokenizer":  "standard",
                         "filter": [
                             "english_possessive_stemmer",
                             "lowercase",
@@ -47,11 +48,20 @@ def init_index(INDEX_NAME="chatbot"):
                     }
                 }
             }
-        }
+        },
+        "mappings" : {
+            "blog" : {
+                "properties" : {
+                    "title": {"type" : "text"},
+                    "text": {"type" : "text"},
+                    "date": {"type": "date"}
+                }
+            }
+        },
     }
 
     print("creating '%s' index..." % (INDEX_NAME))
     res = es.indices.create(index = INDEX_NAME, body = request_body)
-    print("response: '%s'" % (res))
+    print(" response: '%s'" % (res))
 
     return es
