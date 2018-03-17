@@ -38,8 +38,8 @@ class BotBubble:
 		global bmsg
 		self.content=self.recommend()
 		bmsg.append(self.content)
-		self.f=open(./history.txt,a)
-		self.f.write(self.content+"\n")
+		self.f=open("./history.txt", "a")
+		self.f.write(str(self.content)+"\n")
 		self.f.close()
 		self.l1=Label(frame,text="Bot:",anchor="w",fg="blue",bg="wheat3")#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
