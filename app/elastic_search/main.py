@@ -3,6 +3,7 @@ from datetime import datetime
 
 __all__ = [
     "init_index",
+    "load_data",
 ]
 
 def init_index(INDEX_NAME="chatbot"):

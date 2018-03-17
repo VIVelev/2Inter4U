@@ -4,11 +4,7 @@ import pandas as pd
 import wikipedia
 import re
 
-from main.methods import (
-	predict_emotion,
-	# train_recommendation_model,
-	# predict_recommendation,
-)
+from main.methods import predict_emotion
 
 from nlp_utils.methods import (
 	preprocess,
@@ -17,6 +13,7 @@ from nlp_utils.methods import (
 	named_entity_recognition,
 )
 
+# Recommendation system
 from elastic_search.main import (
 	init_index,
 )
@@ -71,7 +68,7 @@ class BotBubble:
 
 	def recommend(self):
 		global DATASET
-		global WIKI_TAGS
+		# global WIKI_TAGS
 		global WIKI_PAGES
 
 		global umsg
@@ -81,7 +78,7 @@ class BotBubble:
 		response = ""
 
 		if len(topics) > 0:
-			print("\nRecognized topics:" + str(topics))
+			print("\nRecognized topics: " + str(topics))
 
 			if len(WIKI_PAGES) == 0:
 				page = wikipedia.page(wikipedia.search(topics[0])[0])
@@ -126,10 +123,12 @@ class BotBubble:
 			# )
 		
 		else:
-			pass
+			response = "Sorry, I did not uderstand that. :("
 
-		print("\nDATASET\n" + str(DATASET))	
-		# print("\nWIKI_TAGS" + str(WIKI_TAGS))							
+		if len(DATASET) > 0:
+			print("\nDATASET\n" + str(DATASET))	
+		# if len(WIKI_TAGS) > 0:
+		# 	print("\nWIKI_TAGS" + str(WIKI_TAGS))							
 		return response
 
 
