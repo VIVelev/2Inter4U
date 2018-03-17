@@ -23,10 +23,10 @@ class UserBubble:
 		global umsg
 		global bmsg
 		umsg.append(content)
-		self.l1=Label(frame,text="Me:",anchor="w",fg="red",width=1000)#.grid(row=roww,column=0)
+		self.l1=Label(frame,text="Me:",anchor="w",fg="red",width=1000,bg="SkyBlue2")#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
 		roww+=1
-		self.l2=Label(frame,text=content,anchor="w")#.grid(row=roww,column=0)
+		self.l2=Label(frame,text=content,anchor="w",bg="SkyBlue2")#.grid(row=roww,column=0)
 		self.l2.pack(fill="x")
 		roww+=1
 		b=BotBubble(frame)
@@ -38,10 +38,13 @@ class BotBubble:
 		global bmsg
 		self.content=self.recommend()
 		bmsg.append(self.content)
-		self.l1=Label(frame,text="Bot:",anchor="w",fg="blue")#.grid(row=roww,column=0)
+		self.f=open(./history.txt,a)
+		self.f.write(self.content+"\n")
+		self.f.close()
+		self.l1=Label(frame,text="Bot:",anchor="w",fg="blue",bg="SkyBlue2")#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
 		roww+=1
-		self.l2=Label(frame,text=self.content,justify=LEFT,anchor="w",width=500)#.grid(row=roww,column=0)
+		self.l2=Label(frame,text=self.content,justify=LEFT,anchor="w",bg="SkyBlue2",width=500)#.grid(row=roww,column=0)
 		self.l2.pack(fill="x")
 		roww+=1
 
@@ -69,7 +72,6 @@ class BotBubble:
 			)
 
 		print(DATASET)		
-	
 
 '''master=Tk()
 a=UserBubble(master,"input")

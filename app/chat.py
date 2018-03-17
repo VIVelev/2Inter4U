@@ -7,7 +7,7 @@ class Chat :
     def __init__(self,master) :
         self.master = master
         self.master.title("Chat")
-        self.c=Canvas(master,borderwidth=0,background="SkyBlue2")
+        self.c=Canvas(master,borderwidth=0,background="LightSalmon1")
         self.frame=Frame(self.c,background="blue")
         self.sc=Scrollbar(master,orient="vertical",command=self.c.yview)
         self.c.configure(yscrollcommand=self.sc.set)
@@ -37,6 +37,7 @@ def main():
     master.minsize(width = 600,height = 700)
     master.maxsize(width = 600, height = 700)
     a = Chat(master)
+    master["bg"]="LightSalmon1"
     master.mainloop()
 
 #main()
