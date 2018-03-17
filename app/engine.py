@@ -23,10 +23,10 @@ class UserBubble:
 		global umsg
 		global bmsg
 		umsg.append(content)
-		self.l1=Label(frame,text="Me:",anchor="w",fg="red",width=1000)#.grid(row=roww,column=0)
+		self.l1=Label(frame,text="Me:",anchor="w",fg="red",width=1000, bg = "wheat3")#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
 		roww+=1
-		self.l2=Label(frame,text=content,anchor="w")#.grid(row=roww,column=0)
+		self.l2=Label(frame,text=content,anchor="w", bg = "wheat3")#.grid(row=roww,column=0)
 		self.l2.pack(fill="x")
 		roww+=1
 		b=BotBubble(frame)
@@ -38,19 +38,19 @@ class BotBubble:
 		global bmsg
 		self.content=self.recommend()
 		bmsg.append(self.content)
-		self.l1=Label(frame,text="Bot:",anchor="w",fg="blue")#.grid(row=roww,column=0)
+		self.l1=Label(frame,text="Bot:",anchor="w",fg="blue", bg = "wheat3")#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
 		roww+=1
-		self.l2=Label(frame,text=self.content,justify=LEFT,anchor="w",width=500)#.grid(row=roww,column=0)
+		self.l2=Label(frame,text=self.content,justify=LEFT,anchor="w",width=500, bg = "wheat3")#.grid(row=roww,column=0)
 		self.l2.pack(fill="x")
 		roww+=1
 
 
 	def recommend(self):
-		global DATASET		
+		global DATASET
 		global umsg
 		global bmsg
-		
+
 		if named_entity_recognition(umsg[-1]):
 			topics = named_entity_recognition(umsg[-1])
 			# print(topics)
@@ -68,8 +68,8 @@ class BotBubble:
 				ignore_index=True
 			)
 
-		print(DATASET)		
-	
+		print(DATASET)
+
 
 '''master=Tk()
 a=UserBubble(master,"input")
