@@ -1,5 +1,7 @@
 from tkinter import *
 
+from datetime import datetime
+
 import pandas as pd
 import re
 import wikipedia
@@ -37,7 +39,8 @@ ALL_ARTICLES = []
 umsg=[]
 bmsg=[]
 isOk = False
-counter = 0
+counter_liked = 0
+
 
 roww=0
 
@@ -83,7 +86,8 @@ class BotBubble:
 
 		global umsg
 		global bmsg
-		global isOk		
+		global isOk
+		global counter_liked
 
 		topics = named_entity_recognition(umsg[-1])
 		response = ""
@@ -96,30 +100,42 @@ class BotBubble:
 				page = wikipedia.page(wikipedia.search(topics[0])[0])
 				article = page.content
 				response = summarize_article(article)
+
 				ALL_ARTICLES.append(
-					create_liked_article(_id=counter, _type="article", INDEX_NAME=LIKED_ARTICLES_INDEX_NAME)
-					)
-				counter+=1
+					{
+						"title": page.title,
+						"content": article,
+						"date": datetime.now()
+					}
+				)
 
 			else:
-				# liked_article = ""
-				# for i in range(len(DATASET)):
-				# 	if DATASET.iloc[i]["label"] == "1":
-				# 		liked_article = DATASET.iloc[i]["text"]
+				like_this = []
+				for i in range(counter_liked):
+					like_this.append(create_liked_article(_id=i))
 
 				body = {
     				"query": {
         				"more_like_this" : {
-            				"fields" : ["title"],
-            				"like" : topics[0],
-            				"min_term_freq" : 1,
-            				"max_query_terms" : 12
+            				"fields": ["title", "content"],
+            				"like": like_this,
+            				"min_term_freq": 1,
+            				"max_query_terms": 12
         				}
    				 	}
 				}
+	
 				res = es.search(index=INDEX_NAME, body=body)
 				print("\nGot %d Hits:" % res['hits']['total'])
-				print(res)
+				response = summarize_article(res["hits"]["hits"][-1]["_source"]["content"])
+
+				ALL_ARTICLES.append(
+					{
+						"title": res["hits"]["hits"][-1]["_source"]["title"],
+						"content": res["hits"]["hits"][-1]["_source"]["content"],
+						"date": res["hits"]["hits"][-1]["_source"]["date"]
+					}
+				)
 
 
 		elif len(bmsg) > 1 and isOk:
@@ -139,7 +155,13 @@ class BotBubble:
 			if label == "1":
 				response = "Nice to hear that from you! ;)\nIn what other topic are you interested?"
 				liked_article = ALL_ARTICLES[-1]
-				res = es.index(index=liked_article["_index"], doc_type=liked_article["_type"], id=liked_article["_id"])
+				doc = {
+					"title": liked_article["title"],
+					"content": liked_article["content"],
+					"date": liked_article["date"]
+				}
+				res = es.index(index=LIKED_ARTICLES_INDEX_NAME, doc_type="article", id=counter_liked, body=doc)
+				counter_liked+=1
 			else:
 				response = "In what other topic are you interested?"
 

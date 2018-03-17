@@ -112,9 +112,9 @@ def load_data(es, n_wiki_pages):
         *wikipedia.search("Sofia"),
         *wikipedia.search("Stalin"),
         *wikipedia.search("Hitler"),
-        *wikipedia.search("Putin"),
-        *wikipedia.search("Brazil"),
-        *wikipedia.search("Europe")                  
+        # *wikipedia.search("Putin"),
+        # *wikipedia.search("Brazil"),
+        # *wikipedia.search("Europe")                  
     ]
 
     i = 0
