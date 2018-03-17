@@ -7,8 +7,8 @@ class History :
         self.string = 'sumaraiza ot bota '
         self.nums = ['link1', 'link2', 'link3']
         self.labels=[]
-        self.c=Canvas(master,borderwidth=0,background="SkyBlue2")
-        self.frame=Frame(self.c,background="blue")
+        self.c=Canvas(master,borderwidth=0)
+        self.frame=Frame(self.c)
         self.sc=Scrollbar(master,orient="vertical",command=self.c.yview)
         self.c.configure(yscrollcommand=self.sc.set)
         self.sc.pack(side="right",fill="y")
