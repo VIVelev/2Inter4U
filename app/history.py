@@ -16,10 +16,14 @@ canvas.create_window((4,4), window=frame, anchor="nw")
 frame.bind("<Configure>", lambda event, canvas=canvas: onFrameConfigure(canvas))
 
 open_file = open("./botsaid.txt", "r")
-lines = open_file.readlines()
 
+labels=[]
 string = "Bot said -> "
-for i in open_file :
+while True:
+    i=open_file.readline()
+    if i is "":
+        break
+#    print (i,type(i))
     jk = string + i
     label = tk.Label(frame,text=jk,width=85)
     label.pack(pady = 50)
