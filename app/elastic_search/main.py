@@ -118,7 +118,7 @@ def load_data(es, n_wiki_pages):
     ]
 
     i = 0
-    for page in pages:
+    for page in pages[:N_WIKI_PAGES]:
         doc = {}
         try:
             doc = {

@@ -83,6 +83,7 @@ class BotBubble:
 
 	def recommend(self):
 		global DATASET
+		global ALL_ARTICLES
 
 		global umsg
 		global bmsg
@@ -96,7 +97,7 @@ class BotBubble:
 			isOk = True
 			print("\nRecognized topics: " + str(topics))
 
-			if len(bmsg) == 1:
+			if len(ALL_ARTICLES) < 5:
 				page = wikipedia.page(wikipedia.search(topics[0])[0])
 				article = page.content
 				response = summarize_article(article)
@@ -117,7 +118,7 @@ class BotBubble:
 				body = {
     				"query": {
         				"more_like_this" : {
-            				"fields": ["title", "content"],
+            				"fields": ["content"],
             				"like": like_this,
             				"min_term_freq": 1,
             				"max_query_terms": 12
@@ -126,7 +127,7 @@ class BotBubble:
 				}
 	
 				res = es.search(index=INDEX_NAME, body=body)
-				print("\nGot %d Hits:" % res['hits']['total'])
+				print("\n------------> Got %d Hits <------------" % res['hits']['total'])
 				response = summarize_article(res["hits"]["hits"][-1]["_source"]["content"])
 
 				ALL_ARTICLES.append(
