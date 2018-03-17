@@ -1,6 +1,7 @@
 import tkinter
 from tkinter import *
 from engine import *
+import sys
 
 ward = None
 class Chat:
@@ -20,6 +21,8 @@ class Chat:
         self.text_box = Entry(self.master, textvar=self.content,width=50)
         self.text_box.bind("<Return>", self.submit)
         self.text_box.place(x=50,y=650)
+
+        self.welcome_msg = BotBubble(self.frame, content="What topic are you interested in?")
        # self.text_box.pack( side = tkinter.BOTTOM, padx = 100 , pady = 40)
 
     def submit(self,event = None):
@@ -33,11 +36,16 @@ class Chat:
 
 
 def main():
-    master = Tk()
-    master.minsize(width = 600,height = 700)
-    master.maxsize(width = 600, height = 700)
-    a = Chat(master)
-    master["bg"] = "wheat3"
-    master.mainloop()
+    try:
+    	print (str(sys.argv[1]))
+    	if (str(sys.argv[1]) == "1"):
+    		master = Tk()
+    		master.minsize(width = 600,height = 700)
+    		master.maxsize(width = 600, height = 700)
+    		a = Chat(master)
+    		master["bg"] = "wheat3"
+    		master.mainloop()
+    except:
+        return
 
 main()

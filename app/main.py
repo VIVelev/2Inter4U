@@ -7,10 +7,19 @@ except ImportError:
 
 from chat import main
 import sys
+import os
 
 
 def chat():
-	main()
+	platform = sys.platform
+	if platform ==  "linux":
+		os.system("python3 chat.py 1")
+
+	elif platform ==  "darwin":
+		os.system("python3 chat.py 1")
+
+	else:
+		os.system("chat.py 1")
 
 
 root = Tk()
