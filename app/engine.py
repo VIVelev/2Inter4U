@@ -1,7 +1,9 @@
 from tkinter import *
 
-import pandas as pd
+from datetime import datetime
 import re
+
+import pandas as pd
 import wikipedia
 
 from main.methods import predict_emotion
@@ -9,8 +11,7 @@ from main.methods import predict_emotion
 from nlp_utils.methods import (
 	preprocess,
 	summarize_article,
-	summarize_categories,
-	named_entity_recognition,
+	named_entity_recognition
 )
 
 # Recommendation system
@@ -37,7 +38,8 @@ ALL_ARTICLES = []
 umsg=[]
 bmsg=[]
 isOk = False
-counter = 0
+counter_liked = 0
+
 
 roww=0
 
@@ -80,10 +82,12 @@ class BotBubble:
 
 	def recommend(self):
 		global DATASET
+		global ALL_ARTICLES
 
 		global umsg
 		global bmsg
-		global isOk		
+		global isOk
+		global counter_liked
 
 		topics = named_entity_recognition(umsg[-1])
 		response = ""
@@ -92,34 +96,46 @@ class BotBubble:
 			isOk = True
 			print("\nRecognized topics: " + str(topics))
 
-			if len(bmsg) == 1:
+			if len(ALL_ARTICLES) < 5:
 				page = wikipedia.page(wikipedia.search(topics[0])[0])
 				article = page.content
 				response = summarize_article(article)
+
 				ALL_ARTICLES.append(
-					create_liked_article(_id=counter, _type="article", INDEX_NAME=LIKED_ARTICLES_INDEX_NAME)
-					)
-				counter+=1
+					{
+						"title": page.title,
+						"content": article,
+						"date": datetime.now()
+					}
+				)
 
 			else:
-				# liked_article = ""
-				# for i in range(len(DATASET)):
-				# 	if DATASET.iloc[i]["label"] == "1":
-				# 		liked_article = DATASET.iloc[i]["text"]
+				like_this = []
+				for i in range(counter_liked):
+					like_this.append(create_liked_article(_id=i))
 
 				body = {
     				"query": {
         				"more_like_this" : {
-            				"fields" : ["title"],
-            				"like" : topics[0],
-            				"min_term_freq" : 1,
-            				"max_query_terms" : 12
+            				"fields": ["content"],
+            				"like": like_this,
+            				"min_term_freq": 1,
+            				"max_query_terms": 12
         				}
    				 	}
 				}
-				res = es.search(index=INDEX_NAME, body=body)
-				print("\nGot %d Hits:" % res['hits']['total'])
-				print(res)
+	
+				res = es.search(index=INDEX_NAME, doc_type="article", body=body)
+				print("\n------------> Got %d Hits <------------" % res['hits']['total'])
+				response = summarize_article(res["hits"]["hits"][-1]["_source"]["content"])
+
+				ALL_ARTICLES.append(
+					{
+						"title": res["hits"]["hits"][-1]["_source"]["title"],
+						"content": res["hits"]["hits"][-1]["_source"]["content"],
+						"date": res["hits"]["hits"][-1]["_source"]["date"]
+					}
+				)
 
 
 		elif len(bmsg) > 1 and isOk:
@@ -136,19 +152,24 @@ class BotBubble:
 				ignore_index=True
 			)
 
+			print("\nDATASET" + str(DATASET))
+
 			if label == "1":
 				response = "Nice to hear that from you! ;)\nIn what other topic are you interested?"
 				liked_article = ALL_ARTICLES[-1]
-				res = es.index(index=liked_article["_index"], doc_type=liked_article["_type"], id=liked_article["_id"])
+				doc = {
+					"title": liked_article["title"],
+					"content": liked_article["content"],
+					"date": liked_article["date"]
+				}
+				res = es.index(index=LIKED_ARTICLES_INDEX_NAME, doc_type="article", id=counter_liked, body=doc)
+				counter_liked+=1
 			else:
-				response = "In what other topic are you interested?"
+				response = "Well, tell me another topic.\nI will try my best, I promise."
 
 			isOk = False
 		
 		else:
 			response = "Sorry, I did not uderstand that. :("
-
-		if len(DATASET) > 0:
-			print("\nDATASET" + str(DATASET))
 								
 		return response
