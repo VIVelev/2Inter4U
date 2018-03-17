@@ -4,8 +4,9 @@ def onFrameConfigure(canvas):
     '''Reset the scroll region to encompass the inner frame'''
     canvas.configure(scrollregion=canvas.bbox("all"))
 
-canvas = tk.Canvas(master, borderwidth=0, background="#ffffff")
-frame = tk.Frame(canvas, background="#ffffff")
+canvas = tk.Canvas(master, borderwidth=0, background="wheat3")
+frame = tk.Frame(canvas, background="wheat3")
+
 vsb = tk.Scrollbar(master, orient="vertical", command=canvas.yview)
 canvas.configure(yscrollcommand=vsb.set)
 
@@ -18,26 +19,20 @@ frame.bind("<Configure>", lambda event, canvas=canvas: onFrameConfigure(canvas))
 open_file = open("./botsaid.txt", "r")
 
 labels=[]
-string = "Bot said -> "
+
+string = "Previous answers -> "
 while True:
     i=open_file.readline()
     if i is "":
         break
 #    print (i,type(i))
     jk = string + i
-    label = tk.Label(frame,text=jk,width=85)
-    label.pack(pady = 50)
+
+    label = tk.Label(frame,text=jk,width=85,background = "wheat4")
+    label.pack(pady = 30)
     labels.append(label)
-
-
-'''string = 'Question #'
-nums = ['1', '2', '3','4','5' , '6' , '7' , '8']
-labels=[]
-for x in nums:
-    jk = string + x
-    label = tk.Label(frame,text=jk,width=85)
-    label.pack(pady = 50)
-    labels.append(label)'''
 master.minsize(width = 600,height = 700)
 master.maxsize(width = 600, height = 700)
+master.title("History")
+master.configure(background='wheat3')
 master.mainloop()
