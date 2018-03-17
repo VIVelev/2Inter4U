@@ -30,6 +30,8 @@ while True:
     labels.append(label)
 
 
+
+
 '''string = 'Question #'
 nums = ['1', '2', '3','4','5' , '6' , '7' , '8']
 labels=[]
@@ -40,4 +42,5 @@ for x in nums:
     labels.append(label)'''
 master.minsize(width = 600,height = 700)
 master.maxsize(width = 600, height = 700)
+master.configure(background='whaet3')
 master.mainloop()
