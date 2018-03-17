@@ -44,7 +44,7 @@ class BotBubble:
 		self.l1=Label(frame,text="Bot:",anchor="w",fg="blue",bg="wheat3")#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
 		roww+=1
-		self.l2=Label(frame,text=self.content,justify=LEFT,anchor="w",bg="wheat3",width=500)#.grid(row=roww,column=0)
+		self.l2=Label(frame,text=self.content,justify=LEFT,anchor="w",bg="wheat3",width=500,wraplength=30)#.grid(row=roww,column=0)
 		self.l2.pack(fill="x")
 		roww+=1
 
