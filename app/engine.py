@@ -11,8 +11,7 @@ from main.methods import predict_emotion
 from nlp_utils.methods import (
 	preprocess,
 	summarize_article,
-	summarize_categories,
-	named_entity_recognition,
+	named_entity_recognition
 )
 
 # Recommendation system
@@ -121,7 +120,8 @@ class BotBubble:
             				"fields": ["content"],
             				"like": like_this,
             				"min_term_freq": 1,
-            				"max_query_terms": 12
+            				"max_query_terms": 12,
+							"boost": 
         				}
    				 	}
 				}
@@ -153,6 +153,8 @@ class BotBubble:
 				ignore_index=True
 			)
 
+			print("\nDATASET" + str(DATASET))
+
 			if label == "1":
 				response = "Nice to hear that from you! ;)\nIn what other topic are you interested?"
 				liked_article = ALL_ARTICLES[-1]
@@ -164,14 +166,11 @@ class BotBubble:
 				res = es.index(index=LIKED_ARTICLES_INDEX_NAME, doc_type="article", id=counter_liked, body=doc)
 				counter_liked+=1
 			else:
-				response = "In what other topic are you interested?"
+				response = "Well, tell me another topic.\nI will try my best, I promise."
 
 			isOk = False
 		
 		else:
 			response = "Sorry, I did not uderstand that. :("
-
-		if len(DATASET) > 0:
-			print("\nDATASET" + str(DATASET))
 								
 		return response
