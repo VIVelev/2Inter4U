@@ -20,7 +20,7 @@ class UserBubble:
 		global umsg
 		global bmsg
 		umsg.append(content)
-		self.l1=Label(frame,text="Me:",anchor="w",fg="red",width=600)#.grid(row=roww,column=0)
+		self.l1=Label(frame,text="Me:",anchor="w",fg="red",width=1000)#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
 		roww+=1
 		self.l2=Label(frame,text=content,anchor="w")#.grid(row=roww,column=0)
@@ -38,7 +38,7 @@ class BotBubble:
 		self.l1=Label(frame,text="Bot:",anchor="w",fg="blue")#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
 		roww+=1
-		self.l2=Label(frame,text=self.content,anchor="w")#.grid(row=roww,column=0)
+		self.l2=Label(frame,text=self.content,justify=LEFT,anchor="w",width=500)#.grid(row=roww,column=0)
 		self.l2.pack(fill="x")
 		roww+=1
 

@@ -7,19 +7,20 @@ class Chat :
     def __init__(self,master) :
         self.master = master
         self.master.title("Chat")
-        self.c=Canvas(master,borderwidth=0,background="#ffffff",width=400,height=400)
-        self.frame=Frame(self.c,background="#ffffff",width=400,height=400)
+        self.c=Canvas(master,borderwidth=0,background="SkyBlue2")
+        self.frame=Frame(self.c,background="blue")
         self.sc=Scrollbar(master,orient="vertical",command=self.c.yview)
         self.c.configure(yscrollcommand=self.sc.set)
         self.sc.pack(side="right",fill="y")
-        self.c.pack(side="left",fill="both",expand=True)
+        self.c.pack(side="left",fill="both",expand=True, pady=(0,80))
         self.c.create_window((4,4),window=self.frame,anchor="nw")
         self.frame.bind("<Configure>",lambda event,canvas=self.c: self.onConfig())
         self.content = StringVar()
         self.content.set("")
-        self.text_box = Entry(self.master, textvar=self.content , width = 400)
+        self.text_box = Entry(self.master, textvar=self.content,width=50)
         self.text_box.bind("<Return>", self.submit)
-        self.text_box.pack( side = tkinter.BOTTOM, padx = 100 , pady = 40)
+        self.text_box.place(x=50,y=650) 
+       # self.text_box.pack( side = tkinter.BOTTOM, padx = 100 , pady = 40)
 
     def submit(self,event = None):
         global ward
