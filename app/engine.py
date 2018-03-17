@@ -1,9 +1,9 @@
 from tkinter import *
 
 from datetime import datetime
+import re
 
 import pandas as pd
-import re
 import wikipedia
 
 from main.methods import predict_emotion
@@ -126,7 +126,7 @@ class BotBubble:
    				 	}
 				}
 	
-				res = es.search(index=INDEX_NAME, body=body)
+				res = es.search(index=INDEX_NAME, doc_type="article", body=body)
 				print("\n------------> Got %d Hits <------------" % res['hits']['total'])
 				response = summarize_article(res["hits"]["hits"][-1]["_source"]["content"])
 
