@@ -51,4 +51,3 @@ def named_entity_recognition(text):
             named_entities.append(x[0][0])
             
     return named_entities
-

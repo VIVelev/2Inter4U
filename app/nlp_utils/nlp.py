@@ -15,7 +15,14 @@ def standartize(df):
         "'re": "are",
         "'s": "is",
         "n't": "not",
-        "'d": "had"
+        "'d": "had",
+        "luv": "love",
+        "amzing": "amazing",
+        "pls": "please",
+        "fck": "fuck",
+        "thx": "thanks",
+        "np": "no problem",
+        "u": "you"
     }
     
     for i in range(len(df)):
