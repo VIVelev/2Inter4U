@@ -6,8 +6,8 @@ import re
 
 from main.methods import (
 	predict_emotion,
-	train_recommendation_model,
-	predict_recommendation,
+	# train_recommendation_model,
+	# predict_recommendation,
 )
 
 from nlp_utils.methods import (
@@ -16,12 +16,6 @@ from nlp_utils.methods import (
 	summarize_categories,
 	named_entity_recognition,
 )
-
-# from nlp_utils.nlp import (
-# 	standartize,
-# 	remove_noise,
-# 	stem,
-# )
 
 DATASET = pd.DataFrame(columns=["text", "label"])
 WIKI_TAGS = pd.DataFrame(columns=["text", "label"])
