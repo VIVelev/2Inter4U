@@ -28,7 +28,7 @@ while True:
 #    print (i,type(i))
     jk = string + i
 
-    label = tk.Label(frame,text=jk,width=85,background = "wheat4")
+    label = tk.Label(frame,text=jk,width=85,background = "wheat4", wraplength = 580)
     label.pack(pady = 30)
     labels.append(label)
 master.minsize(width = 600,height = 700)
