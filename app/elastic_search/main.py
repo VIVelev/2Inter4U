@@ -109,9 +109,9 @@ def load_data(es, n_wiki_pages):
 
     pages = [
         *wikipedia.search("Bulgaria"),
-        *wikipedia.search("Sofia"),
-        *wikipedia.search("Stalin"),
-        *wikipedia.search("Hitler"),            
+        *wikipedia.search("Sofia"),        
+        *wikipedia.search("Russia"),
+        *wikipedia.search("Moscow")        
     ]
 
     i = 0

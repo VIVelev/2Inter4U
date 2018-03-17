@@ -37,6 +37,7 @@ init_liked_articles_index()
 
 DATASET = pd.DataFrame(columns=["text", "label"])
 ALL_ARTICLES = []
+RECOMMENDED_ARTICLES = []
 
 umsg=[]
 bmsg=[]
@@ -69,7 +70,10 @@ class BotBubble:
 		if content == None:
 			self.content=self.recommend()
 			if type(self.content) is list:
-				self.content = self.content[0] + "\n\nYou may also want to check out these articles:\n" + str(self.content[1])
+				data = self.content
+				self.content = data[0] + "\n\nYou may also want to check out these articles:\n"
+				for article in data[1]:
+					self.content += "\t* "+str(article)+"\n"
 		else:
 			self.content = content
 
@@ -88,6 +92,7 @@ class BotBubble:
 	def recommend(self):
 		global DATASET
 		global ALL_ARTICLES
+		global RECOMMENDED_ARTICLES		
 
 		global umsg
 		global bmsg
@@ -136,15 +141,11 @@ class BotBubble:
 				print("\n------------> Got %d Hits <------------" % res['hits']['total'])
 				hits = res["hits"]["hits"]
 
-				recommended_titles = []
-				for hit in hits[:3]:
-					recommended_titles.append(hit["_source"]["title"])
+				for hit in hits[2:5]:
+					RECOMMENDED_ARTICLES.append(hit["_source"]["title"])
 
 				rnd = 0 # random.randint(0, len(hits)-1)
-				response = [
-					summarize_article(hits[rnd]["_source"]["content"]),
-					recommended_titles
-				]
+				response = summarize_article(hits[rnd]["_source"]["content"]),
 
 				ALL_ARTICLES.append(
 					{
@@ -156,8 +157,7 @@ class BotBubble:
 
 
 		elif len(bmsg) > 1 and isOk:
-			last_umsg = umsg[-1]
-			X_tf = preprocess(last_umsg)
+			X_tf = preprocess(umsg[-1])
 			label = predict_emotion(X_tf)
 
 			DATASET = DATASET.append(
@@ -167,7 +167,6 @@ class BotBubble:
 				),
 				ignore_index=True
 			)
-
 			print("\nDATASET" + str(DATASET))
 
 			if label == "1":
@@ -180,8 +179,13 @@ class BotBubble:
 				}
 				res = es.index(index=LIKED_ARTICLES_INDEX_NAME, doc_type="article", id=counter_liked, body=doc)
 				counter_liked+=1
+
 			else:
 				response = "Well, tell me another topic.\nI will try my best, I promise."
+
+			if RECOMMENDED_ARTICLES:
+				response = [response, RECOMMENDED_ARTICLES]
+				RECOMMENDED_ARTICLES = []
 
 			isOk = False
 		
