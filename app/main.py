@@ -4,18 +4,18 @@ try:
 except ImportError:
 	pass
 from chat import main
-import sys
+import platform
 
 def chat():
 	main()
 
-if sys.platform=="Darwin":
+if platform.platform()=="darwin":
 	root=Tk()
 	root.geometry('1000x500')
 	logo = ImageTk.PhotoImage(Image.open("../img/ht1.gif"))
 	background=Label(root, image=logo).place(x=0,y=0,relwidth=1, relheight=1)
 
-	chat_button=Button(root,justify = LEFT, bg="#b0966b", bd=0,command=chat())
+	chat_button=Button(root,justify = LEFT, bg="#b0966b", bd=0,command=chat)
 	chat_photo=ImageTk.PhotoImage(Image.open("../img/chat1tp.gif"), width=80, height=80)
 	chat_button.config(image=chat_photo, width=78, height=78)
 	chat_button.place(x=835, y=50)
