@@ -8,6 +8,7 @@ except ImportError:
 import sys
 import os
 
+#Making the chat button to work
 def chat():
 	platform = sys.platform
 	if platform ==  "linux":
@@ -17,8 +18,17 @@ def chat():
 		os.system("python3 chat.py 1")
 
 	else:
-		os.system("chat.py 1")	
+		os.system("chat.py 1")
 
+#Making the history button to work
+def history():
+        platform = sys.platform
+        if platform == "linux":
+            os.system("python3 history.py")
+        elif platform == "darwin" :
+            os.system("python3 history.py")
+        else :
+            os.system("history.py")
 
 root = Tk()
 root.geometry('1000x500')
@@ -32,7 +42,7 @@ if sys.platform == "darwin":
 	chat_button.config(image=chat_photo, width=78, height=78)
 	chat_button.place(x=835, y=50)
 
-	history_button = Button(root, justify = RIGHT, bg="#b0966b", bd=0)
+	history_button = Button(root, justify = RIGHT, bg="#b0966b", bd=0, command = history)
 	history_photo=ImageTk.PhotoImage(Image.open("../img/hstictp.gif"), width=50, height=50)
 	history_button.config(image=history_photo, width=46, height=46)
 	history_button.place(x=850, y=180)
@@ -61,7 +71,7 @@ else:
 	chat_button.config(image=chat_photo, width=78, height=78)
 	chat_button.place(x=835, y=50)
 
-	history_button = Button(root, justify = RIGHT, bg="#b0966b", bd=0)
+	history_button = Button(root, justify = RIGHT, bg="#b0966b", bd=0,command=history)
 	history_photo=PhotoImage(file="../img/hstictp.gif", width=50, height=50)
 	history_button.config(image=history_photo, width=46, height=46)
 	history_button.place(x=850, y=180)
