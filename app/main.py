@@ -13,13 +13,13 @@ import os
 def chat():
 	platform = sys.platform
 	if platform ==  "linux":
-		os.system("python3 chat.py")
+		os.system("python3 chat.py 1")
 
 	elif platform ==  "darwin":
-		os.system("python3 chat.py")
+		os.system("python3 chat.py 1")
 
 	else:
-		os.system("python3 chat.py")
+		os.system("chat.py 1")
 
 
 root = Tk()

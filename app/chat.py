@@ -1,6 +1,7 @@
 import tkinter
 from tkinter import *
 from engine import *
+import sys
 
 ward = None
 class Chat:
@@ -35,11 +36,16 @@ class Chat:
 
 
 def main():
-    master = Tk()
-    master.minsize(width = 600,height = 700)
-    master.maxsize(width = 600, height = 700)
-    a = Chat(master)
-    master["bg"] = "wheat3"
-    master.mainloop()
+    try:
+    	print (str(sys.argv[1]))
+    	if (str(sys.argv[1]) == "1"):
+    		master = Tk()
+    		master.minsize(width = 600,height = 700)
+    		master.maxsize(width = 600, height = 700)
+    		a = Chat(master)
+    		master["bg"] = "wheat3"
+    		master.mainloop()
+    except:
+        return
 
 main()
