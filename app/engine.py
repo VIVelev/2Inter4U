@@ -17,14 +17,14 @@ from nlp_utils.methods import (
 	named_entity_recognition,
 )
 
-from nlp_utils.nlp import (
-	standartize,
-	remove_noise,
-	stem,
-)
+# from nlp_utils.nlp import (
+# 	standartize,
+# 	remove_noise,
+# 	stem,
+# )
 
 DATASET = pd.DataFrame(columns=["text", "label"])
-WIKI_TAGS = pd.DataFrame(columns=["category", "label"])
+WIKI_TAGS = pd.DataFrame(columns=["text", "label"])
 WIKI_PAGES = []
 
 umsg=[]
@@ -58,8 +58,8 @@ class BotBubble:
 			self.content = content
 
 		bmsg.append(self.content)
-		self.f=open("./history.txt", "a")
-		self.f.write(str(self.content)+"\n")
+		# self.f=open("./history.txt", "a")
+		# self.f.write(str(self.content)+"\n")
 		self.f.close()
 		self.l1=Label(frame,text="Bot:",anchor="w",fg="blue",bg="wheat3")#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
@@ -91,16 +91,11 @@ class BotBubble:
 				
 			else:
 				CURRENT_TAGS = WIKI_TAGS
-			
-				standartize(CURRENT_TAGS)
-				remove_noise(CURRENT_TAGS)
-				stem(CURRENT_TAGS)
 
-				X_train, y_train = CURRENT_TAGS["text"], CURRENT_TAGS["label"]
-				print(X_train)
-				print(y_train)
-
-				response = "HELLO"
+				page = wikipedia.page(wikipedia.search(topics[0])[0])
+				WIKI_PAGES.append(page)
+				article = page.content
+				response = summarize_article(article)
 
 		elif len(bmsg) > 1:
 			last_umsg = umsg[-1]
@@ -119,13 +114,16 @@ class BotBubble:
 							label
 						]
 					],
-					columns=["category", "label"]
+					columns=["text", "label"]
 				),
 				ignore_index=True
 			)
 
 			DATASET = DATASET.append(
-				pd.DataFrame([[bmsg[-1], label]], columns=["text", "label"]),
+				pd.DataFrame(
+					[[bmsg[-1], label]],
+					columns=["text", "label"]
+				),
 				ignore_index=True
 			)
 		
