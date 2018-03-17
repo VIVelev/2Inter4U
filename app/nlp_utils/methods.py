@@ -1,9 +1,10 @@
 import pickle
 import pandas as pd
+
 import nltk
+from gensim.summarization.summarizer import summarize
 
 from .nlp import *
-from gensim.summarization.summarizer import summarize
 
 
 __all__ = [
