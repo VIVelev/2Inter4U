@@ -1,5 +1,9 @@
 from tkinter import *
 
+import pandas as pd
+import wikipedia
+import re
+
 from main.methods import predict_emotion
 from nlp_utils.methods import (
 	preprocess,
@@ -7,12 +11,11 @@ from nlp_utils.methods import (
 	named_entity_recognition
 )
 
-import wikipedia
-import re
-
-roww=0
+DATASET = pd.DataFrame(columns=["text", "label"])
 umsg=[]
 bmsg=[]
+
+roww=0
 
 class UserBubble:
 	def __init__(self,frame,content):
@@ -44,11 +47,13 @@ class BotBubble:
 
 
 	def recommend(self):
+		global DATASET		
 		global umsg
+		global bmsg
 		
 		if named_entity_recognition(umsg[-1]):
 			topics = named_entity_recognition(umsg[-1])
-			print(topics)
+			# print(topics)
 
 			article = wikipedia.page(wikipedia.search(topics[0])[0]).content
 			response = summarize_article(article)
@@ -57,7 +62,13 @@ class BotBubble:
 		else:
 			last_msg = umsg[-1]
 			X_tf = preprocess(last_msg)
-			return predict_emotion(X_tf)
+			label = predict_emotion(X_tf)
+			DATASET = DATASET.append(
+				pd.DataFrame([[bmsg[-1], label]], columns=["text", "label"]),
+				ignore_index=True
+			)
+
+		print(DATASET)		
 	
 
 '''master=Tk()
