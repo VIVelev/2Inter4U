@@ -51,9 +51,11 @@ class BotBubble:
 		global umsg
 		global bmsg
 		
-		if named_entity_recognition(umsg[-1]):
-			topics = named_entity_recognition(umsg[-1])
-			# print(topics)
+		topics = named_entity_recognition(umsg[-1])
+		print(topics)
+
+		if len(topics) > 0:
+			print(topics)
 
 			article = wikipedia.page(wikipedia.search(topics[0])[0]).content
 			response = summarize_article(article)

@@ -3,8 +3,8 @@ from tkinter import *
 from engine import *
 
 ward = None
-class Chat :
-    def __init__(self,master) :
+class Chat:
+    def __init__(self, master) :
         self.master = master
         self.master.title("Chat")
         self.c=Canvas(master,borderwidth=0,background="SkyBlue2")
@@ -39,4 +39,4 @@ def main():
     a = Chat(master)
     master.mainloop()
 
-#main()
+main()
