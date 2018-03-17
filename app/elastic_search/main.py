@@ -24,7 +24,7 @@ es = Elasticsearch()
 
 isLoaded = False
 INDEX_NAME = "wikipedia"
-N_WIKI_PAGES = 100
+N_WIKI_PAGES = 1000
 
 LIKED_ARTICLES_INDEX_NAME = "liked_articles"
 
@@ -109,8 +109,8 @@ def load_data(es, n_wiki_pages):
 
     pages = [
         *wikipedia.search("Bulgaria"),
+        *wikipedia.search("Russia"),        
         *wikipedia.search("Sofia"),        
-        *wikipedia.search("Russia"),
         *wikipedia.search("Moscow")        
     ]
 

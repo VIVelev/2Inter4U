@@ -38,6 +38,7 @@ init_liked_articles_index()
 DATASET = pd.DataFrame(columns=["text", "label"])
 ALL_ARTICLES = []
 RECOMMENDED_ARTICLES = []
+counter_liked = 0
 
 POSITIVE = [
 	"Nice to hear that from you! ;)\nIn what other topic are you interested?",
@@ -48,7 +49,7 @@ POSITIVE = [
 	"Thanks.\nWhat more can we talk about?",
 	"Anything else I can help with :D?",
 	"Would you like to checkout something?",
-	"Tell me something you are interested in.",
+	"Tell me something else you are interested in.",
 	"In what else are you interested? :)"
 ]
 NEGATIVE = [
@@ -68,7 +69,6 @@ umsg=[]
 bmsg=[]
 roww=0
 isOk = False
-counter_liked = 0
 
 class UserBubble:
 	def __init__(self,frame,content):
@@ -115,7 +115,8 @@ class BotBubble:
 	def recommend(self):
 		global DATASET
 		global ALL_ARTICLES
-		global RECOMMENDED_ARTICLES	
+		global RECOMMENDED_ARTICLES
+		global counter_liked		
 
 		global POSITIVE
 		global NEGATIVE	
@@ -123,7 +124,6 @@ class BotBubble:
 		global umsg
 		global bmsg
 		global isOk
-		global counter_liked
 
 
 		topics = named_entity_recognition(umsg[-1])
@@ -167,8 +167,10 @@ class BotBubble:
 				print("\n------------> Got %d Hits <------------" % res['hits']['total'])
 				hits = res["hits"]["hits"]
 				
-				if len(RECOMMENDED_ARTICLES) == 0
-					for hit in hits[2:5]:
+				if len(RECOMMENDED_ARTICLES) == 0:
+					l = random.randint(0, len(hits)-1)
+					h = random.randint(l+1, len(hits)-1)
+					for hit in hits[l:h]:
 						RECOMMENDED_ARTICLES.append(hit["_source"]["title"])
 
 				matches = wikipedia.search(topics[0])
