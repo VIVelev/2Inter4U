@@ -30,7 +30,10 @@ def preprocess(text):
     return X
 
 def summarize_article(text):
-    return summarize(text, ratio=0.05)
+    summary = summarize(text, ratio=0.02)
+    sents = nltk.sent_tokenize(summary)[:50]
+    res = ". ".join(sents)
+    return res
 
 def summarize_categories(text):
     return summarize(text, ratio=0.1)
