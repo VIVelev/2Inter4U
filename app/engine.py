@@ -2,12 +2,15 @@ from tkinter import *
 
 from datetime import datetime
 import re
+import random
 
 import pandas as pd
 import wikipedia
 
+# Sentiment algo
 from main.methods import predict_emotion
 
+# Natural Language Preprocessing
 from nlp_utils.methods import (
 	preprocess,
 	summarize_article,
@@ -20,7 +23,7 @@ from elastic_search.main import (
 
     isLoaded,
 	INDEX_NAME,
-    N_WIKI_PAGES,
+ 	N_WIKI_PAGES,
     init_index,
 
     init_liked_articles_index,
@@ -65,6 +68,8 @@ class BotBubble:
 
 		if content == None:
 			self.content=self.recommend()
+			if type(self.content) is list:
+				self.content = self.content[0] + "\n\nYou may also want to check out these articles:\n" + str(self.content[1])
 		else:
 			self.content = content
 
@@ -89,6 +94,7 @@ class BotBubble:
 		global isOk
 		global counter_liked
 
+
 		topics = named_entity_recognition(umsg[-1])
 		response = ""
 
@@ -96,15 +102,16 @@ class BotBubble:
 			isOk = True
 			print("\nRecognized topics: " + str(topics))
 
-			if len(ALL_ARTICLES) < 5:
-				page = wikipedia.page(wikipedia.search(topics[0])[0])
-				article = page.content
-				response = summarize_article(article)
+			if len(ALL_ARTICLES) < 3:
+				matches = wikipedia.search(topics[0])
+				rnd = 0 # random.randint(0, len(matches)-1)
+				page = wikipedia.page(matches[rnd])
+				response = summarize_article(page.content)
 
 				ALL_ARTICLES.append(
 					{
 						"title": page.title,
-						"content": article,
+						"content": page.content,
 						"date": datetime.now()
 					}
 				)
@@ -124,23 +131,32 @@ class BotBubble:
         				}
    				 	}
 				}
-	
+
 				res = es.search(index=INDEX_NAME, doc_type="article", body=body)
 				print("\n------------> Got %d Hits <------------" % res['hits']['total'])
-				response = summarize_article(res["hits"]["hits"][-1]["_source"]["content"])
+				hits = res["hits"]["hits"]
+
+				recommended_titles = []
+				for hit in hits[:3]:
+					recommended_titles.append(hit["_source"]["title"])
+
+				rnd = 0 # random.randint(0, len(hits)-1)
+				response = [
+					summarize_article(hits[rnd]["_source"]["content"]),
+					recommended_titles
+				]
 
 				ALL_ARTICLES.append(
 					{
-						"title": res["hits"]["hits"][-1]["_source"]["title"],
-						"content": res["hits"]["hits"][-1]["_source"]["content"],
-						"date": res["hits"]["hits"][-1]["_source"]["date"]
+						"title": hits[rnd]["_source"]["title"],
+						"content": hits[rnd]["_source"]["content"],
+						"date": hits[rnd]["_source"]["date"]
 					}
 				)
 
 
 		elif len(bmsg) > 1 and isOk:
 			last_umsg = umsg[-1]
-
 			X_tf = preprocess(last_umsg)
 			label = predict_emotion(X_tf)
 

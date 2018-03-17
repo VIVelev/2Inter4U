@@ -30,10 +30,13 @@ def preprocess(text):
     return X
 
 def summarize_article(text):
-    return summarize(summarize(summarize(text)))
+    summary = summarize(text, ratio=0.02)
+    sents = nltk.sent_tokenize(summary)[:50]
+    res = ". ".join(sents)
+    return res
 
 def summarize_categories(text):
-    return summarize(summarize(text))
+    return summarize(text, ratio=0.1)
 
 def named_entity_recognition(text):
     data = nltk.word_tokenize(text)
