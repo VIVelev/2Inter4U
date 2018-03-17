@@ -6,7 +6,7 @@ except ImportError:
 	pass # Linux
 
 from chat import main
-import platform
+import sys
 
 
 def chat():

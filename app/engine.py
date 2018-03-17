@@ -23,10 +23,10 @@ class UserBubble:
 		global umsg
 		global bmsg
 		umsg.append(content)
-		self.l1=Label(frame,text="Me:",anchor="w",fg="red",width=1000,bg="SkyBlue2")#.grid(row=roww,column=0)
+		self.l1=Label(frame,text="Me:",anchor="w",fg="red",width=1000, bg = "wheat3")#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
 		roww+=1
-		self.l2=Label(frame,text=content,anchor="w",bg="SkyBlue2")#.grid(row=roww,column=0)
+		self.l2=Label(frame,text=content,anchor="w", bg = "wheat3")#.grid(row=roww,column=0)
 		self.l2.pack(fill="x")
 		roww+=1
 		b=BotBubble(frame)
@@ -41,22 +41,23 @@ class BotBubble:
 		self.f=open(./history.txt,a)
 		self.f.write(self.content+"\n")
 		self.f.close()
-		self.l1=Label(frame,text="Bot:",anchor="w",fg="blue",bg="SkyBlue2")#.grid(row=roww,column=0)
+		self.l1=Label(frame,text="Bot:",anchor="w",fg="blue",bg="wheat3")#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
 		roww+=1
-		self.l2=Label(frame,text=self.content,justify=LEFT,anchor="w",bg="SkyBlue2",width=500)#.grid(row=roww,column=0)
+		self.l2=Label(frame,text=self.content,justify=LEFT,anchor="w",bg="wheat3",width=500)#.grid(row=roww,column=0)
 		self.l2.pack(fill="x")
 		roww+=1
 
 
 	def recommend(self):
-		global DATASET		
+		global DATASET
 		global umsg
 		global bmsg
 		
-		if named_entity_recognition(umsg[-1]):
-			topics = named_entity_recognition(umsg[-1])
-			# print(topics)
+		topics = named_entity_recognition(umsg[-1])
+
+		if len(topics) > 0:
+			print(topics)
 
 			article = wikipedia.page(wikipedia.search(topics[0])[0]).content
 			response = summarize_article(article)
@@ -72,6 +73,7 @@ class BotBubble:
 			)
 
 		print(DATASET)		
+
 
 '''master=Tk()
 a=UserBubble(master,"input")
