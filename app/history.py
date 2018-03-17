@@ -28,20 +28,8 @@ while True:
     label = tk.Label(frame,text=jk,width=85,background = "wheat4")
     label.pack(pady = 50)
     labels.append(label)
-
-    #label.pack(pady =50)
-
-
-
-'''string = 'Question #'
-nums = ['1', '2', '3','4','5' , '6' , '7' , '8']
-labels=[]
-for x in nums:
-    jk = string + x
-    label = tk.Label(frame,text=jk,width=85)
-    label.pack(pady = 50)
-    labels.append(label)'''
 master.minsize(width = 600,height = 700)
 master.maxsize(width = 600, height = 700)
+master.title("History")
 master.configure(background='wheat3')
 master.mainloop()
