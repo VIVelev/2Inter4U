@@ -46,7 +46,11 @@ if sys.platform == "darwin":
 
 	aboutus_button = Button(root, bd=0)
 	aboutus_photo = ImageTk.PhotoImage(Image.open("../img/aboutustp.gif"), width=50, height=50)
+<<<<<<< HEAD
 	aboutus_button.config(image=aboutus_photo, width=45, height=45)
+=======
+	aboutus_button.config(image=aboutustp_photo, width=45, height=45)
+>>>>>>> 5b0a611139d376ef51f8506052c9812a2b95524e
 	aboutus_button.place(x=845, y=390)
 
 	reset_button = Button(root, bd=0)

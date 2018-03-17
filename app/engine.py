@@ -17,9 +17,15 @@ from nlp_utils.methods import (
 	named_entity_recognition,
 )
 
+from elastic_search.main import (
+	init_index,
+)
+
 DATASET = pd.DataFrame(columns=["text", "label"])
 WIKI_TAGS = pd.DataFrame(columns=["text", "label"])
 WIKI_PAGES = []
+
+es = init_index()
 
 umsg=[]
 bmsg=[]
@@ -32,10 +38,10 @@ class UserBubble:
 		global umsg
 		global bmsg
 		umsg.append(content)
-		self.l1=Label(frame,text="Me:",anchor="w",fg="red",width=1000, bg = "wheat3")#.grid(row=roww,column=0)
+		self.l1=Label(frame,text="Me:",anchor="w",fg="red",width=1000, bg = "wheat3",font=("CourierNew",12))#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
 		roww+=1
-		self.l2=Label(frame,text=content,anchor="w", bg = "wheat3")#.grid(row=roww,column=0)
+		self.l2=Label(frame,text=content,anchor="w", bg = "wheat3",font=("CourierNew",12))#.grid(row=roww,column=0)
 		self.l2.pack(fill="x")
 		roww+=1
 		b=BotBubble(frame)
@@ -55,10 +61,10 @@ class BotBubble:
 		# self.f=open("./history.txt", "a")
 		# self.f.write(str(self.content)+"\n")
 		# self.f.close()
-		self.l1=Label(frame,text="Bot:",anchor="w",fg="blue",bg="wheat3")#.grid(row=roww,column=0)
+		self.l1=Label(frame,text="Bot:",anchor="w",fg="blue",bg="wheat3",font=("CourierNew",12))#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
 		roww+=1
-		self.l2=Label(frame,text=self.content,justify=LEFT,anchor="w",bg="wheat3",width=500,wraplength=580)#.grid(row=roww,column=0)
+		self.l2=Label(frame,text=self.content,justify=LEFT,anchor="w",bg="wheat3",width=500,wraplength=580,font=("CourierNew",12))#.grid(row=roww,column=0)
 		self.l2.pack(fill="x")
 		roww+=1
 
@@ -84,8 +90,6 @@ class BotBubble:
 				response = summarize_article(article)
 				
 			else:
-				CURRENT_TAGS = WIKI_TAGS
-
 				page = wikipedia.page(wikipedia.search(topics[0])[0])
 				WIKI_PAGES.append(page)
 				article = page.content

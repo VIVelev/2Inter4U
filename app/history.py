@@ -1,31 +1,43 @@
-from tkinter import *
+import tkinter as tk
+master=tk.Tk()
+def onFrameConfigure(canvas):
+    '''Reset the scroll region to encompass the inner frame'''
+    canvas.configure(scrollregion=canvas.bbox("all"))
+
+canvas = tk.Canvas(master, borderwidth=0, background="#ffffff")
+frame = tk.Frame(canvas, background="#ffffff")
+vsb = tk.Scrollbar(master, orient="vertical", command=canvas.yview)
+canvas.configure(yscrollcommand=vsb.set)
+
+vsb.pack(side="right", fill="y")
+canvas.pack(side="right", fill="both", expand=True)
+canvas.create_window((4,4), window=frame, anchor="nw")
+
+frame.bind("<Configure>", lambda event, canvas=canvas: onFrameConfigure(canvas))
+
+open_file = open("./botsaid.txt", "r")
+
+labels=[]
+string = "Bot said -> "
+while True:
+    i=open_file.readline()
+    if i is "":
+        break
+#    print (i,type(i))
+    jk = string + i
+    label = tk.Label(frame,text=jk,width=85)
+    label.pack(pady = 50)
+    labels.append(label)
 
 
-class History :
-    def __init__(self,master) :
-        self.master = master
-        self.string = 'sumaraiza ot bota '
-        self.nums = ['link1', 'link2', 'link3']
-        self.labels=[]
-        self.c=Canvas(master,borderwidth=0,background="SkyBlue2")
-        self.frame=Frame(self.c,background="blue")
-        self.sc=Scrollbar(master,orient="vertical",command=self.c.yview)
-        self.c.configure(yscrollcommand=self.sc.set)
-        self.sc.pack(side="right",fill="y")
-        self.c.pack(side="left",fill="both",expand=True, pady=(0,80))
-        self.c.create_window((4,4),window=self.frame,anchor="nw")
-        for x in self.nums:
-            self.jk = self.string + x
-            self.label = Label(master,text=self.jk)
-            self.label.pack(pady = 15)
-            self.labels.append(self.label)
-    def onConfig (self):
-        self.c.configure(scrollregion=self.c.bbox("all"))
-
-
-
-master = Tk()
-h = History(master)
-master.minsize(width = 600,height = 600)
-master.maxsize(width = 600, height = 600)
+'''string = 'Question #'
+nums = ['1', '2', '3','4','5' , '6' , '7' , '8']
+labels=[]
+for x in nums:
+    jk = string + x
+    label = tk.Label(frame,text=jk,width=85)
+    label.pack(pady = 50)
+    labels.append(label)'''
+master.minsize(width = 600,height = 700)
+master.maxsize(width = 600, height = 700)
 master.mainloop()
