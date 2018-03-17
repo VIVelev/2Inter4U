@@ -15,14 +15,25 @@ canvas.create_window((4,4), window=frame, anchor="nw")
 
 frame.bind("<Configure>", lambda event, canvas=canvas: onFrameConfigure(canvas))
 
-string = 'Question #'
+open_file = open("./botsaid.txt", "r")
+lines = open_file.readlines()
+
+string = "Bot said -> "
+for i in open_file :
+    jk = string + i
+    label = tk.Label(frame,text=jk,width=85)
+    label.pack(pady = 50)
+    labels.append(label)
+
+
+'''string = 'Question #'
 nums = ['1', '2', '3','4','5' , '6' , '7' , '8']
 labels=[]
 for x in nums:
     jk = string + x
     label = tk.Label(frame,text=jk,width=85)
     label.pack(pady = 50)
-    labels.append(label)
+    labels.append(label)'''
 master.minsize(width = 600,height = 700)
 master.maxsize(width = 600, height = 700)
 master.mainloop()
