@@ -39,4 +39,4 @@ def main():
     a = Chat(master)
     master.mainloop()
 
-main()
+#main()
