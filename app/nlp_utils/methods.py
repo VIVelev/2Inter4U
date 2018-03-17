@@ -30,10 +30,10 @@ def preprocess(text):
     return X
 
 def summarize_article(text):
-    return summarize(summarize(summarize(text)))
+    return summarize(text, ratio=0.05)
 
 def summarize_categories(text):
-    return summarize(summarize(text))
+    return summarize(text, ratio=0.1)
 
 def named_entity_recognition(text):
     data = nltk.word_tokenize(text)
