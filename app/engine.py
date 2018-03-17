@@ -17,9 +17,15 @@ from nlp_utils.methods import (
 	named_entity_recognition,
 )
 
+from elastic_search.main import (
+	init_index,
+)
+
 DATASET = pd.DataFrame(columns=["text", "label"])
 WIKI_TAGS = pd.DataFrame(columns=["text", "label"])
 WIKI_PAGES = []
+
+es = init_index()
 
 umsg=[]
 bmsg=[]
@@ -84,8 +90,6 @@ class BotBubble:
 				response = summarize_article(article)
 				
 			else:
-				CURRENT_TAGS = WIKI_TAGS
-
 				page = wikipedia.page(wikipedia.search(topics[0])[0])
 				WIKI_PAGES.append(page)
 				article = page.content
