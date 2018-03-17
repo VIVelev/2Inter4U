@@ -35,7 +35,7 @@ class Chat :
 def main():
     master = Tk()
     master.minsize(width = 600,height = 700)
-    master.maxsize(width = 600*2, height = 700*2)
+    master.maxsize(width = 600, height = 700)
     a = Chat(master)
     master.mainloop()
 
