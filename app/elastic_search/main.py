@@ -14,7 +14,7 @@ __all__ = [
 
 isLoaded = False
 INDEX_NAME = "chatbot"
-N_WIKI_PAGES = 1
+N_WIKI_PAGES = 1000
 
 def init_index(INDEX_NAME=INDEX_NAME, N_WIKI_PAGES=N_WIKI_PAGES):
     es = Elasticsearch()
