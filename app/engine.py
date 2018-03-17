@@ -120,8 +120,7 @@ class BotBubble:
             				"fields": ["content"],
             				"like": like_this,
             				"min_term_freq": 1,
-            				"max_query_terms": 12,
-							"boost": 
+            				"max_query_terms": 12
         				}
    				 	}
 				}
