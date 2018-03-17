@@ -39,6 +39,31 @@ DATASET = pd.DataFrame(columns=["text", "label"])
 ALL_ARTICLES = []
 RECOMMENDED_ARTICLES = []
 
+POSITIVE = [
+	"Nice to hear that from you! ;)\nIn what other topic are you interested?",
+	"I am happy to hear that!\nTell something else you want to know about.",
+	"Do you need something else?",
+	"What else do you want to talk about?",
+	"Cool. Anything else?",
+	"Thanks.\nWhat more can we talk about?",
+	"Anything else I can help with :D?",
+	"Would you like to checkout something?",
+	"Tell me something you are interested in.",
+	"In what else are you interested? :)"
+]
+NEGATIVE = [
+	"Well, tell me another topic.\nI will try my best, I promise.",
+	"I will get better if you chat with me more.",
+	"Ohh, sorry.\nTell me something else you are into.",
+	"Let me try find you something one more time.",
+	"Sorry mate.\nAsk me something else.",
+	"Would you like to checkout something?",
+	"Tell another thing you want to learn about.",
+	"Somethin else I can help with?",
+	"Ahh, I missed again.\nPlease, try one more time.",
+	"My mistake.\nTry something else."
+]
+
 umsg=[]
 bmsg=[]
 isOk = False
@@ -92,7 +117,10 @@ class BotBubble:
 	def recommend(self):
 		global DATASET
 		global ALL_ARTICLES
-		global RECOMMENDED_ARTICLES		
+		global RECOMMENDED_ARTICLES	
+
+		global POSITIVE
+		global NEGATIVE	
 
 		global umsg
 		global bmsg
@@ -170,7 +198,8 @@ class BotBubble:
 			print("\nDATASET" + str(DATASET))
 
 			if label == "1":
-				response = "Nice to hear that from you! ;)\nIn what other topic are you interested?"
+				response = POSITIVE[random.randint(0, len(POSITIVE)-1)]
+
 				liked_article = ALL_ARTICLES[-1]
 				doc = {
 					"title": liked_article["title"],
@@ -181,14 +210,14 @@ class BotBubble:
 				counter_liked+=1
 
 			else:
-				response = "Well, tell me another topic.\nI will try my best, I promise."
+				response = NEGATIVE[random.randint(0, len(NEGATIVE)-1)]
 
 			if RECOMMENDED_ARTICLES:
 				response = [response, RECOMMENDED_ARTICLES]
 				RECOMMENDED_ARTICLES = []
 
 			isOk = False
-		
+
 		else:
 			response = "Sorry, I did not uderstand that. :("
 								
