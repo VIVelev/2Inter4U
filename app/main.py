@@ -1,17 +1,22 @@
 from tkinter import *
+
 try:
-	from PIL import ImageTk, Image
+	from PIL import ImageTk, Image # OS X imports
 except ImportError:
-	pass
+	pass # Linux
+
 from chat import main
 import platform
+
 
 def chat():
 	main()
 
-if platform.platform()=="darwin":
-	root=Tk()
-	root.geometry('1000x500')
+
+root = Tk()
+root.geometry('1000x500')
+
+if sys.platform == "darwin":
 	logo = ImageTk.PhotoImage(Image.open("../img/ht1.gif"))
 	background=Label(root, image=logo).place(x=0,y=0,relwidth=1, relheight=1)
 
@@ -40,16 +45,11 @@ if platform.platform()=="darwin":
 	reset_button.config(image=reset_photo, width=45, height=45)
 	reset_button.place(x=845, y=320)
 
-
-	root.mainloop()
-
 else:
-	root=Tk()
-	root.geometry('1000x500')
 	logo = PhotoImage(file="../img/ht1.gif")
 	background=Label(root, image=logo).place(x=0,y=0,relwidth=1, relheight=1)
 
-	chat_button=Button(root,justify = LEFT, bg="#b0966b", bd=0,command=chat())
+	chat_button=Button(root,justify = LEFT, bg="#b0966b", bd=0,command=chat)
 	chat_photo=PhotoImage(file="../img/chat1tp.gif", width=80, height=80)
 	chat_button.config(image=chat_photo, width=78, height=78)
 	chat_button.place(x=835, y=50)
@@ -75,4 +75,4 @@ else:
 	reset_button.place(x=845, y=320)
 
 
-	root.mainloop()
+root.mainloop()
