@@ -43,12 +43,16 @@ if sys.platform == "darwin":
 	fav_button.place(x=850, y=250)
 
 	aboutus_button = Button(root, bd=0)
-	aboutus_photo = ImageTk.PhotoImage(Image.open("../img/aboutus.gif"), width=50, height=50)
+	aboutus_photo = ImageTk.PhotoImage(Image.open("../img/aboutustp.gif"), width=50, height=50)
+<<<<<<< HEAD
 	aboutus_button.config(image=aboutus_photo, width=45, height=45)
+=======
+	aboutus_button.config(image=aboutustp_photo, width=45, height=45)
+>>>>>>> 5b0a611139d376ef51f8506052c9812a2b95524e
 	aboutus_button.place(x=845, y=390)
 
 	reset_button = Button(root, bd=0)
-	reset_photo = ImageTk.PhotoImage(Image.open("../img/reset.gif"), height=50, width=50)
+	reset_photo = ImageTk.PhotoImage(Image.open("../img/resettp.gif"), height=50, width=50)
 	reset_button.config(image=reset_photo, width=45, height=45)
 	reset_button.place(x=845, y=320)
 
@@ -72,12 +76,12 @@ else:
 	fav_button.place(x=850, y=250)
 
 	aboutus_button = Button(root, bd=0)
-	aboutus_photo = PhotoImage(file="../img/aboutus.gif", width=50, height=50)
+	aboutus_photo = PhotoImage(file="../img/aboutustp.gif", width=50, height=50)
 	aboutus_button.config(image=aboutus_photo, width=45, height=45)
 	aboutus_button.place(x=845, y=390)
 
 	reset_button = Button(root, bd=0)
-	reset_photo = PhotoImage(file="../img/reset.gif", height=50, width=50)
+	reset_photo = PhotoImage(file="../img/resettp.gif", height=50, width=50)
 	reset_button.config(image=reset_photo, width=45, height=45)
 	reset_button.place(x=845, y=320)
 
