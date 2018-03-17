@@ -5,6 +5,22 @@ According to 2016 data, the city has a population of 1,304,772 and the whole Sof
 Sofia is the economic heart of Bulgaria and home to most major Bulgarian and international companies operating in the country, as well as the Bulgarian National Bank and the Bulgarian Stock Exchange.
 "Sofia — 130 Years Capital" (in Bulgarian).
 None
+<<<<<<< HEAD
 Being Bulgaria's primate city, Sofia is a hometown of many of the major local universities, cultural institutions and commercial companies.
 According to 2016 data, the city has a population of 1,304,772 and the whole Sofia Capital Municipality of 1,441,918.
 A number of research and cultural departments operate within SU, including its own publishing house, botanical gardens, a space research centre, a quantum electronics department, and a Confucius Institute Rakovski Defence and Staff College, the National Academy of Arts, and Sofia Medical University are other major higher education establishments in the city.
+=======
+What topic are you interested in?
+What topic are you interested in?
+None
+What topic are you interested in?
+According to 2016 data, the city has a population of 1,304,772 and the whole Sofia Capital Municipality of 1,441,918.
+Sofia is the economic heart of Bulgaria and home to most major Bulgarian and international companies operating in the country, as well as the Bulgarian National Bank and the Bulgarian Stock Exchange.
+"Sofia — 130 Years Capital" (in Bulgarian).
+What topic are you interested in?
+None
+What topic are you interested in?
+According to 2016 data, the city has a population of 1,304,772 and the whole Sofia Capital Municipality of 1,441,918.
+Sofia is the economic heart of Bulgaria and home to most major Bulgarian and international companies operating in the country, as well as the Bulgarian National Bank and the Bulgarian Stock Exchange.
+"Sofia — 130 Years Capital" (in Bulgarian).
+>>>>>>> 34801d8afc238f93cd9a1d10a8b7880d7dc5d4d2

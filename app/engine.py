@@ -32,11 +32,16 @@ class UserBubble:
 		b=BotBubble(frame)
 
 class BotBubble:
-	def __init__(self,frame):
+	def __init__(self,frame, content=None):
 		global roww
 		global umsg
 		global bmsg
-		self.content=self.recommend()
+
+		if content == None:
+			self.content=self.recommend()
+		else:
+			self.content = content
+
 		bmsg.append(self.content)
 		self.f=open("./history.txt", "a")
 		self.f.write(str(self.content)+"\n")
@@ -63,7 +68,7 @@ class BotBubble:
 			response = summarize_article(article)
 			return response
 
-		else:
+		elif len(bmsg) > 1:
 			last_msg = umsg[-1]
 			X_tf = preprocess(last_msg)
 			label = predict_emotion(X_tf)
