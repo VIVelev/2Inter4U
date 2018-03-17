@@ -20,7 +20,7 @@ open_file = open("./botsaid.txt", "r")
 
 labels=[]
 
-string = "Previous answers  sfsdgflsdfjnlsdkfjnlksdfjgndfsklgnbsfdlkgbsfdklgjbsdfklgjsdfbglksdfjgnsfdlkgnjsdfklgnsdf-> "
+string = "Previous answers -> "
 while True:
     i=open_file.readline()
     if i is "":
