@@ -5,10 +5,8 @@ try:
 except ImportError:
 	pass # Linux
 
-from chat import main
 import sys
 import os
-
 
 def chat():
 	platform = sys.platform
@@ -19,7 +17,7 @@ def chat():
 		os.system("python3 chat.py 1")
 
 	else:
-		os.system("chat.py 1")
+		os.system("chat.py 1")	
 
 
 root = Tk()

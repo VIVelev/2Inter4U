@@ -1,7 +1,6 @@
 from tkinter import *
 
 import pandas as pd
-import wikipedia
 import re
 
 from main.methods import predict_emotion
@@ -14,15 +13,13 @@ from nlp_utils.methods import (
 )
 
 # Recommendation system
-from elastic_search.main import (
-	init_index,
-)
+from elastic_search.main import init_index
+es = init_index()
+#######################
 
 DATASET = pd.DataFrame(columns=["text", "label"])
 # WIKI_TAGS = pd.DataFrame(columns=["text", "label"])
 WIKI_PAGES = []
-
-es = init_index()
 
 umsg=[]
 bmsg=[]
@@ -130,12 +127,3 @@ class BotBubble:
 		# if len(WIKI_TAGS) > 0:
 		# 	print("\nWIKI_TAGS" + str(WIKI_TAGS))							
 		return response
-
-
-'''master=Tk()
-a=UserBubble(master,"input")
-b=BotBubble(master,"answer")
-master.minsize(width=600, height=600)
-master.maxsize(width=600, height=600)
-print(umsg,bmsg)
-master.mainloop()'''

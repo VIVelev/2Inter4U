@@ -1,12 +1,22 @@
 from elasticsearch import Elasticsearch
 from datetime import datetime
 
+# Data source
+import wikipedia
+
 __all__ = [
+    "isLoaded",
     "init_index",
     "load_data",
+    "INDEX_NAME",
+    "N_WIKI_PAGES",
 ]
 
-def init_index(INDEX_NAME="chatbot"):
+isLoaded = False
+INDEX_NAME = "chatbot"
+N_WIKI_PAGES = 5
+
+def init_index(INDEX_NAME=INDEX_NAME, N_WIKI_PAGES=N_WIKI_PAGES):
     es = Elasticsearch()
 
     if es.indices.exists(INDEX_NAME):
@@ -51,10 +61,10 @@ def init_index(INDEX_NAME="chatbot"):
             }
         },
         "mappings" : {
-            "blog" : {
+            "article" : {
                 "properties" : {
                     "title": {"type" : "text"},
-                    "text": {"type" : "text"},
+                    "content": {"type" : "text"},
                     "date": {"type": "date"}
                 }
             }
@@ -65,4 +75,27 @@ def init_index(INDEX_NAME="chatbot"):
     res = es.indices.create(index = INDEX_NAME, body = request_body)
     print(" response: '%s'" % (res))
 
+    load_data(es, n_wiki_pages=N_WIKI_PAGES)
+
+    global isLoaded
+    isLoaded = True
     return es
+
+
+def load_data(es, n_wiki_pages):
+    print("\nLoading wikipedia database...")
+
+    for page in wikipedia.random(pages=n_wiki_pages):
+        doc = {}
+        try:
+            doc = {
+                "title": page,
+                "content": wikipedia.page(page).content,
+                "date": datetime.now()
+            }
+
+            es.index(index=INDEX_NAME, doc_type="article", id=i, body=doc)
+        except Exception as e:
+            pass
+
+    print("Wikipedia database loaded.")

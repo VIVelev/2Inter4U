@@ -37,14 +37,13 @@ class Chat:
 
 def main():
     try:
-    	print (str(sys.argv[1]))
-    	if (str(sys.argv[1]) == "1"):
-    		master = Tk()
-    		master.minsize(width = 600,height = 700)
-    		master.maxsize(width = 600, height = 700)
-    		a = Chat(master)
-    		master["bg"] = "wheat3"
-    		master.mainloop()
+        if (str(sys.argv[1]) == "1"):
+            master = Tk()
+            master.minsize(width=600, height=700)
+            master.maxsize(width=600, height=700)
+            a = Chat(master)
+            master["bg"] = "wheat3"
+            master.mainloop()
     except:
         return
 
