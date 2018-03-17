@@ -21,14 +21,14 @@ def chat():
 		os.system("chat.py 1")
 
 #Making the history button to work
-    def history():
-        platfor = sys.platform
+def history():
+        platform = sys.platform
         if platform == "linux":
             os.system("python3 histry.py")
         elif platform == "darwin" :
             os.system("python3 history.py")
         else :
-            is.system("history.py")
+            os.system("history.py")
 
 root = Tk()
 root.geometry('1000x500')
