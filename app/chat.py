@@ -7,7 +7,7 @@ class Chat:
     def __init__(self, master) :
         self.master = master
         self.master.title("Chat")
-        self.c=Canvas(master,borderwidth=0,background="SkyBlue2")
+        self.c=Canvas(master,borderwidth=0,background="wheat3")
         self.frame=Frame(self.c,background="blue")
         self.sc=Scrollbar(master,orient="vertical",command=self.c.yview)
         self.c.configure(yscrollcommand=self.sc.set)
@@ -19,7 +19,7 @@ class Chat:
         self.content.set("")
         self.text_box = Entry(self.master, textvar=self.content,width=50)
         self.text_box.bind("<Return>", self.submit)
-        self.text_box.place(x=50,y=650) 
+        self.text_box.place(x=50,y=650)
        # self.text_box.pack( side = tkinter.BOTTOM, padx = 100 , pady = 40)
 
     def submit(self,event = None):
@@ -37,6 +37,7 @@ def main():
     master.minsize(width = 600,height = 700)
     master.maxsize(width = 600, height = 700)
     a = Chat(master)
+    master["bg"] = "wheat3"
     master.mainloop()
 
 main()
