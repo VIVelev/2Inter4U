@@ -54,7 +54,7 @@ class BotBubble:
 		bmsg.append(self.content)
 		# self.f=open("./history.txt", "a")
 		# self.f.write(str(self.content)+"\n")
-		self.f.close()
+		# self.f.close()
 		self.l1=Label(frame,text="Bot:",anchor="w",fg="blue",bg="wheat3")#.grid(row=roww,column=0)
 		self.l1.pack(fill="x")
 		roww+=1

@@ -11,13 +11,15 @@ import os
 
 
 def chat():
-	switch (sys.platform):
-		case "linux":
-			os.system("python3 chat.py")
-		case "darwin":
-			os.system("python3 chat.py")
-		default:
-			os.system("chat.py")
+	platform = sys.platform
+	if platform ==  "linux":
+		os.system("python3 chat.py")
+
+	elif platform ==  "darwin":
+		os.system("python3 chat.py")
+
+	else:
+		os.system("python3 chat.py")
 
 
 root = Tk()
