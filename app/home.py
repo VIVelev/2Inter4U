@@ -8,6 +8,7 @@ except ImportError:
 import sys
 import os
 
+#Making the chat button to work
 def chat():
 	platform = sys.platform
 	if platform ==  "linux":
@@ -17,8 +18,17 @@ def chat():
 		os.system("python3 chat.py 1")
 
 	else:
-		os.system("chat.py 1")	
+		os.system("chat.py 1")
 
+#Making the history button to work
+    def history():
+        platfor = sys.platform
+        if platform == "linux":
+            os.system("python3 histry.py")
+        elif platform == "darwin" :
+            os.system("python3 history.py")
+        else :
+            is.system("history.py")
 
 root = Tk()
 root.geometry('1000x500')
@@ -33,7 +43,7 @@ if sys.platform == "darwin":
 	chat_button.place(x=835, y=50)
 
 	history_button = Button(root, justify = RIGHT, bg="#b0966b", bd=0)
-	history_photo=ImageTk.PhotoImage(Image.open("../img/hstictp.gif"), width=50, height=50)
+	history_photo=ImageTk.PhotoImage(Image.open("../img/hstictp.gif"), width=50, height=50, command = history)
 	history_button.config(image=history_photo, width=46, height=46)
 	history_button.place(x=850, y=180)
 
