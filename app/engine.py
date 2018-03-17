@@ -66,11 +66,9 @@ NEGATIVE = [
 
 umsg=[]
 bmsg=[]
+roww=0
 isOk = False
 counter_liked = 0
-
-
-roww=0
 
 class UserBubble:
 	def __init__(self,frame,content):
@@ -168,20 +166,34 @@ class BotBubble:
 				res = es.search(index=INDEX_NAME, doc_type="article", body=body)
 				print("\n------------> Got %d Hits <------------" % res['hits']['total'])
 				hits = res["hits"]["hits"]
+				
+				if len(RECOMMENDED_ARTICLES) == 0
+					for hit in hits[2:5]:
+						RECOMMENDED_ARTICLES.append(hit["_source"]["title"])
 
-				for hit in hits[2:5]:
-					RECOMMENDED_ARTICLES.append(hit["_source"]["title"])
-
-				rnd = 0 # random.randint(0, len(hits)-1)
-				response = summarize_article(hits[rnd]["_source"]["content"]),
+				matches = wikipedia.search(topics[0])
+				rnd = 0 # random.randint(0, len(matches)-1)
+				page = wikipedia.page(matches[rnd])
+				response = summarize_article(page.content)
 
 				ALL_ARTICLES.append(
 					{
-						"title": hits[rnd]["_source"]["title"],
-						"content": hits[rnd]["_source"]["content"],
-						"date": hits[rnd]["_source"]["date"]
+						"title": page.title,
+						"content": page.content,
+						"date": datetime.now()
 					}
 				)
+
+				# rnd = 0 # random.randint(0, len(hits)-1)
+				# response = summarize_article(hits[rnd]["_source"]["content"])
+
+				# ALL_ARTICLES.append(
+				# 	{
+				# 		"title": hits[rnd]["_source"]["title"],
+				# 		"content": hits[rnd]["_source"]["content"],
+				# 		"date": hits[rnd]["_source"]["date"]
+				# 	}
+				# )
 
 
 		elif len(bmsg) > 1 and isOk:

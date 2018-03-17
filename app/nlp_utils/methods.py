@@ -31,7 +31,7 @@ def preprocess(text):
 
 def summarize_article(text):
     summary = summarize(text, ratio=0.02)
-    sents = nltk.sent_tokenize(summary)[:10]
+    sents = nltk.sent_tokenize(summary)[:5]
     res = ". ".join(sents)
     return res
 
