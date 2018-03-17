@@ -1,6 +1,6 @@
 import pickle
-from .algo import MyModel
 
+from .algo import MyModel
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
