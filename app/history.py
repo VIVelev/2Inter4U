@@ -42,5 +42,5 @@ for x in nums:
     labels.append(label)'''
 master.minsize(width = 600,height = 700)
 master.maxsize(width = 600, height = 700)
-master.configure(background='whaet3')
+master.configure(background='wheat3')
 master.mainloop()
