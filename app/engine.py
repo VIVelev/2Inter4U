@@ -112,6 +112,31 @@ class BotBubble:
 		roww+=1
 
 
+
+	def get_page(self, topics):
+		global ALL_ARTICLES
+		matches = wikipedia.search(topics[0])
+
+		isSeen = True				
+		idx = 0
+		page = wikipedia.page(matches[idx])
+
+		# code for skipping seen articles #
+
+		# if len(ALL_ARTICLES) > 0:
+		# 	while isSeen:
+		# 		for article in ALL_ARTICLES:
+		# 			if page.title != article["title"]:
+		# 				isSeen = False
+		# 				break
+		# 		if isSeen:
+		# 			idx+=1
+		# 			page = wikipedia.page(matches[idx])
+		# else:
+		# 	pass
+
+		return page
+
 	def recommend(self):
 		global DATASET
 		global ALL_ARTICLES
@@ -125,7 +150,6 @@ class BotBubble:
 		global bmsg
 		global isOk
 
-
 		topics = named_entity_recognition(umsg[-1])
 		response = ""
 
@@ -134,9 +158,7 @@ class BotBubble:
 			print("\nRecognized topics: " + str(topics))
 
 			if len(ALL_ARTICLES) < 3:
-				matches = wikipedia.search(topics[0])
-				rnd = 0 # random.randint(0, len(matches)-1)
-				page = wikipedia.page(matches[rnd])
+				page = self.get_page(topics)
 				response = summarize_article(page.content)
 
 				ALL_ARTICLES.append(
@@ -173,9 +195,8 @@ class BotBubble:
 					for hit in hits[l:h]:
 						RECOMMENDED_ARTICLES.append(hit["_source"]["title"])
 
-				matches = wikipedia.search(topics[0])
-				rnd = random.randint(0, len(matches)-1)
-				page = wikipedia.page(matches[rnd])
+
+				page = self.get_page(topics)
 				response = summarize_article(page.content)
 
 				ALL_ARTICLES.append(
