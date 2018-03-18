@@ -60,7 +60,7 @@ NEGATIVE = [
 	"Sorry mate.\nAsk me something else.",
 	"Would you like to checkout something?",
 	"Tell another thing you want to learn about.",
-	"Somethin else I can help with?",
+	"Something else I can help with?",
 	"Ahh, I missed again.\nPlease, try one more time.",
 	"My mistake.\nTry something else."
 ]
@@ -94,7 +94,7 @@ class BotBubble:
 			self.content=self.recommend()
 			if type(self.content) is list:
 				data = self.content
-				self.content = data[0] + "\n\nYou may also want to check out these articles:\n"
+				self.content = data[0] + "\n\nYou may also want to check out these article(s):\n"
 				for article in data[1]:
 					self.content += "\t* "+str(article)+"\n"
 		else:
@@ -157,7 +157,7 @@ class BotBubble:
 			isOk = True
 			print("\nRecognized topics: " + str(topics))
 
-			if len(ALL_ARTICLES) < 3:
+			if len(DATASET[DATASET["label"] == "1"]) < 3:
 				page = self.get_page(topics)
 				response = summarize_article(page.content)
 
@@ -179,8 +179,14 @@ class BotBubble:
         				"more_like_this" : {
             				"fields": ["content"],
             				"like": like_this,
-            				"min_term_freq": 1,
-            				"max_query_terms": 12
+
+            				"max_query_terms": 12,							
+            				"min_term_freq": 2,
+							# "min_doc_freq": 5,
+							# "max_doc_freq": 0,
+							# "min_word_length": 0,
+							# "max_word_length": 0,							
+							"analyzer": "english"
         				}
    				 	}
 				}
@@ -191,7 +197,7 @@ class BotBubble:
 				
 				if len(RECOMMENDED_ARTICLES) == 0:
 					l = random.randint(0, len(hits)-1)
-					h = random.randint(l+1, len(hits)-1)
+					h = random.randint(l, len(hits)-1)
 					for hit in hits[l:h]:
 						RECOMMENDED_ARTICLES.append(hit["_source"]["title"])
 

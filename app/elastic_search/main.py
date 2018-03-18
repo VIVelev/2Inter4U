@@ -13,7 +13,6 @@ __all__ = [
     "init_index",
     "load_data",
 
-
     "init_liked_articles_index",
     "create_liked_article",
     "LIKED_ARTICLES_INDEX_NAME",
@@ -78,19 +77,18 @@ def init_index(INDEX_NAME=INDEX_NAME, N_WIKI_PAGES=N_WIKI_PAGES):
                 "properties" : {
                     "title": {
                         "type" : "text",
-                        # "analyzer": "english"
+                        "analyzer": "english"
                     },
                     "content": {
                         "type" : "text",
-                        # "analyzer": "english"                        
+                        "analyzer": "english"                        
                     },
                     "date": {
-                        "type": "date",
-                        # "analyzer": "english"
+                        "type": "date"
                     }
                 }
             }
-        },
+        }
     }
 
     print("creating '%s' index..." % (INDEX_NAME))
@@ -181,19 +179,18 @@ def init_liked_articles_index(INDEX_NAME=LIKED_ARTICLES_INDEX_NAME):
                 "properties" : {
                     "title": {
                         "type" : "text",
-                        # "analyzer": "english"
+                        "analyzer": "english"
                     },
                     "content": {
                         "type" : "text",
-                        # "analyzer": "english"                        
+                        "analyzer": "english"                        
                     },
                     "date": {
-                        "type": "date",
-                        # "analyzer": "english"
+                        "type": "date"
                     }
                 }
             }
-        },
+        }
     }
 
     print("creating '%s' index..." % (INDEX_NAME))
