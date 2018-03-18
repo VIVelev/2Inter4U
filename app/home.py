@@ -30,6 +30,15 @@ def history():
         else :
             os.system("history.py")
 
+def aboutus():
+        platform = sys.platform
+        if platform == "linux":
+            os.system("python3 aboutus.py")
+        elif platform == "darwin" :
+            os.system("python3 aboutus.py")
+        else :
+            os.system("aboutus.py")
+
 root = Tk()
 root.geometry('1000x500')
 
@@ -52,11 +61,11 @@ if sys.platform == "darwin":
 	fav_button.config(image=fav_photo, width=46, height=46)
 	fav_button.place(x=850, y=250)
 
-	aboutus_button = Button(root, bd=0)
+	aboutus_button = Button(root, bd=0, command = aboutus)
 	aboutus_photo = ImageTk.PhotoImage(Image.open("../img/aboutustp.gif"), width=50, height=50)
 	aboutus_button.place(x=845, y=390)
 
-	reset_button = Button(root, bd=0)
+	reset_button = Button(root, bd=0 )
 	reset_photo = ImageTk.PhotoImage(Image.open("../img/resettp.gif"), height=50, width=50)
 	reset_button.config(image=reset_photo, width=45, height=45)
 	reset_button.place(x=845, y=320)
@@ -80,7 +89,7 @@ else:
 	fav_button.config(image=fav_photo, width=46, height=46)
 	fav_button.place(x=850, y=250)
 
-	aboutus_button = Button(root, bd=0)
+	aboutus_button = Button(root, bd=0, command = aboutus)
 	aboutus_photo = PhotoImage(file="../img/aboutustp.gif", width=50, height=50)
 	aboutus_button.config(image=aboutus_photo, width=45, height=45)
 	aboutus_button.place(x=845, y=390)
