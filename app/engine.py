@@ -174,7 +174,7 @@ class BotBubble:
 						RECOMMENDED_ARTICLES.append(hit["_source"]["title"])
 
 				matches = wikipedia.search(topics[0])
-				rnd = 0 # random.randint(0, len(matches)-1)
+				rnd = random.randint(0, len(matches)-1)
 				page = wikipedia.page(matches[rnd])
 				response = summarize_article(page.content)
 
