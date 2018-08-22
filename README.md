@@ -1,4 +1,4 @@
-# OldAndBald
+# Julie - the chatbot that knows you
 
 ## How to install and run
 
