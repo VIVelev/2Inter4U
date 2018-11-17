@@ -2,7 +2,7 @@ import re
 import nltk
 
 __all__ = [
-    "standartize",
+    "standardize",
     "remove_punct",
     "remove_noise",
     "lemmatize",
@@ -10,7 +10,7 @@ __all__ = [
 ]
 
 
-def standartize(df):
+def standardize(df):
     lookup_table = {
         "'ve": "have",
         "'re": "are",
