@@ -1,13 +1,14 @@
 import nltk
 import re
 
-__all__ = (
+__all__ = [
     "standartize",
     "remove_punct",
     "remove_noise",
     "lemmatize",
     "stem",
-)
+]
+
 
 def standartize(df):
     lookup_table = {
@@ -17,12 +18,11 @@ def standartize(df):
         "n't": "not",
         "'d": "had",
         "luv": "love",
-        "amzing": "amazing",
         "pls": "please",
         "fck": "fuck",
         "thx": "thanks",
         "np": "no problem",
-        "u": "you"
+        "u": "you",
     }
     
     for i in range(len(df)):
@@ -40,6 +40,7 @@ def standartize(df):
         text = " ".join(sents)
         df.iloc[i]["text"] = text
 
+
 def remove_punct(text):
     punct = ["`", "(\!)", "@", "#", "(\$)", "%", "(\^)", "(\&)", "(\*)", "(\()", "(\))", "-", "(\+)", "=",
             "(\{)", "(\})", "(\[)", "(\])", "(\|)", "(\\\\)",
@@ -52,6 +53,7 @@ def remove_punct(text):
         
     text = re.sub("(\s)+", " ", text)
     return text
+
 
 def remove_noise(df):
     stop_words = set(nltk.corpus.stopwords.words("english"))
@@ -72,6 +74,7 @@ def remove_noise(df):
         text = " ".join(sents)
         df.iloc[i]["text"] = remove_punct(text)
         df.iloc[i]["label"] = remove_punct(df.iloc[i]["label"])
+
 
 def lemmatize(df):
     lemmatizer = nltk.WordNetLemmatizer()
