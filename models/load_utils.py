@@ -1,13 +1,13 @@
 import pandas as pd
 
 __all__ = [
+    "DIR",
     "text2array",
     "array2df",
     "text2df",
-    "DIR"
 ]
 
-DIR = "/Users/victor/Desktop/OldAndBald/app/data/"
+DIR = "/Users/victor/Documents/Julie/data/"
 
 def text2array(file, DIR=DIR, is_yelp=False):
     res = []
