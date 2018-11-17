@@ -8,10 +8,10 @@ numpy = "*"
 pandas = "*"
 nltk = "*"
 gensim = "*"
-scikit-learn = "*"
 wikipedia = "*"
 flask = "*"
 sqlalchemy = "*"
+pydojoml = "==0.2.0"
 
 [dev-packages]
 jupyter = "*"
