@@ -1,20 +1,19 @@
-import pickle
 import pandas as pd
 
 import nltk
 from gensim.summarization.summarizer import summarize
 
-from .nlp import *
-
+import nlp
 
 __all__ = [
     "preprocess",
     "summarize_article",
-    "summarize_categories",
     "named_entity_recognition",
 ]
 
-tf_idf = pickle.load(open("./nlp_utils/tf_idf.pickle", "rb"))
+
+# TODO: Implement TF-IDF
+tf_idf = None
 
 def preprocess(text):
     data = pd.DataFrame(
@@ -22,9 +21,9 @@ def preprocess(text):
             columns=["text", "label"]
         )
 
-    standartize(data)
-    remove_noise(data)
-    stem(data)
+    nlp.standartize(data)
+    nlp.remove_noise(data)
+    nlp.stem(data)
     X = tf_idf.transform(data["text"])
 
     return X
@@ -34,9 +33,6 @@ def summarize_article(text):
     sents = nltk.sent_tokenize(summary)[:5]
     res = ". ".join(sents)
     return res
-
-def summarize_categories(text):
-    return summarize(text, ratio=0.1)
 
 def named_entity_recognition(text):
     data = nltk.word_tokenize(text)

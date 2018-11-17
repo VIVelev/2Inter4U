@@ -7,6 +7,7 @@ __all__ = [
     "text2df",
 ]
 
+
 DIR = "/Users/victor/Documents/2Inter4U/data/"
 
 def text2array(file, DIR=DIR, is_yelp=False):
