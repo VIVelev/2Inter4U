@@ -10,6 +10,8 @@ nltk = "*"
 gensim = "*"
 scikit-learn = "*"
 wikipedia = "*"
+flask = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 jupyter = "*"
