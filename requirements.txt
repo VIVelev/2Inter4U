@@ -1,9 +1,0 @@
-pandas
-numpy
-scipy
-nltk
-scikit-learn
-wikipedia
-gensim
-pillow
-elasticsearch
