@@ -1,6 +1,5 @@
-import pandas as pd
-
 import nltk
+import pandas as pd
 from gensim.summarization.summarizer import summarize
 
 import nlp
@@ -29,10 +28,7 @@ def preprocess(text):
     return X
 
 def summarize_article(text):
-    summary = summarize(text, ratio=0.02)
-    sents = nltk.sent_tokenize(summary)[:5]
-    res = ". ".join(sents)
-    return res
+    return summarize(text, ratio=0.02)
 
 def named_entity_recognition(text):
     data = nltk.word_tokenize(text)

@@ -1,5 +1,5 @@
-import nltk
 import re
+import nltk
 
 __all__ = [
     "standartize",
