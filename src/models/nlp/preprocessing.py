@@ -25,20 +25,20 @@ def standartize(df):
         "u": "you",
     }
     
-    for i in range(len(df)):
-        text = df.iloc[i]["text"].lower()
-        sents = nltk.sent_tokenize(text)
-        
-        for j in range(len(sents)):
-            words = nltk.word_tokenize(sents[j])
-            for k in range(len(words)):
-                if words[k] in lookup_table.keys():
-                    words[k] = lookup_table[words[k]]
-   
-            sents[j] = " ".join(words)
-        
-        text = " ".join(sents)
-        df.iloc[i]["text"] = text
+    corpus = ['' for _ in range(df.shape[0])]
+    i = 0
+    for sample in df.values:
+        for sent in nltk.sent_tokenize(sample[0].lower()):
+            for word in nltk.word_tokenize(sent):
+
+                if word in lookup_table.keys():
+                    corpus[i] += lookup_table[word]
+                else:
+                    corpus[i] += word
+                corpus[i] + ''
+        i+=1
+
+    df["text"] = corpus
 
 
 def remove_punct(text):
