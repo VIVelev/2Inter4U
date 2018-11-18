@@ -27,6 +27,7 @@ def standardize(df):
     
     corpus = ['' for _ in range(df.shape[0])]
     i = 0
+    
     for sample in df.values:
         for sent in nltk.sent_tokenize(sample[0].lower()):
             for word in nltk.word_tokenize(sent):
@@ -59,21 +60,20 @@ def remove_noise(df):
     stop_words = set(nltk.corpus.stopwords.words("english"))
     stop_words.remove("not")
     
-    for i in range(len(df)):
-        text = df.iloc[i]["text"].lower()
-        sents = nltk.sent_tokenize(text)
+    corpus = ['' for _ in range(df.shape[0])]
+    i = 0
 
-        for j in range(len(sents)):
-            words = nltk.word_tokenize(sents[j])
-            for word in words:
-                if word in stop_words:
-                    words.remove(word)
-                
-            sents[j] = " ".join(words)
-        
-        text = " ".join(sents)
-        df.iloc[i]["text"] = remove_punct(text)
-        df.iloc[i]["label"] = remove_punct(df.iloc[i]["label"])
+    for sample in df.values:
+        for sent in nltk.sent_tokenize(sample[0].lower()):
+            for word in nltk.word_tokenize(sent):
+
+                if word not in stop_words:
+                    corpus[i] += word + ' '
+            
+        corpus[i] = remove_punct(corpus[i])
+        i+=1
+
+    df["text"] = corpus
 
 
 def lemmatize(df):
