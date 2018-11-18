@@ -6,6 +6,7 @@ __all__ = [
     "remove_noise",
     "lemmatize",
     "stem",
+    "ner_preprocessing",
 ]
 
 
@@ -41,7 +42,7 @@ def standardize(df):
     df["text"] = corpus
 
 
-def remove_punct(text):
+def _remove_punct(text):
     punct = ["`", "(\!)", "@", "#", "(\$)", "%", "(\^)", "(\&)",
             "(\*)", "(\()", "(\))", "-", "(\+)", "=",
             "(\{)", "(\})", "(\[)", "(\])", "(\|)", "(\\\\)",
@@ -69,7 +70,7 @@ def remove_noise(df):
                 if word not in stop_words:
                     corpus[i] += word + ' '
             
-        corpus[i] = remove_punct(corpus[i])
+        corpus[i] = _remove_punct(corpus[i])
         i+=1
 
     df["text"] = corpus
@@ -103,3 +104,16 @@ def stem(df):
         i+=1
 
     df["text"] = corpus
+
+
+def ner_preprocessing(a):
+    tokens = nltk.word_tokenize(a)
+    prepositions = ["about", "in"]
+    
+    for prep in prepositions:
+        idxs = [i for i, x in enumerate(tokens) if x == prep]
+        for i in idxs:
+            if i+1 < len(tokens) and tokens[i+1] not in prepositions:
+                tokens[i+1] = tokens[i+1][0].upper() + tokens[i+1][1:]
+
+    return ' '.join(tokens)

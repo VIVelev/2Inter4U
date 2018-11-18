@@ -1,13 +1,14 @@
-from .methods import preprocess, summarize_article, named_entity_recognition
-from .preprocessing import standardize, remove_noise, lemmatize, stem
+from .methods import preprocess, summarize_article, get_named_entities
+from .preprocessing import standardize, remove_noise, lemmatize, stem, ner_preprocessing
 
 __all__ = [
     "preprocess",
     "summarize_article",
-    "named_entity_recognition",
+    "get_named_entities",
 
     "standardize",
     "remove_noise",
     "lemmatize",
     "stem",
+    "ner_preprocessing",
 ]
