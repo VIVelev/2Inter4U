@@ -36,7 +36,7 @@ def standardize(df):
                     corpus[i] += lookup_table[word]
                 else:
                     corpus[i] += word
-                corpus[i] + ''
+                corpus[i] += ' '
         i+=1
 
     df["text"] = corpus
