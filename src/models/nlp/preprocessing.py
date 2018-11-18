@@ -94,16 +94,13 @@ def lemmatize(df):
 def stem(df):
     stemmer = nltk.PorterStemmer()
     
-    for i in range(len(df)):
-        text = df.iloc[i]["text"].lower()
-        sents = nltk.sent_tokenize(text)
-        
-        for j in range(len(sents)):
-            words = nltk.word_tokenize(sents[j])
-            for k in range(len(words)):
-                words[k] = stemmer.stem(words[k])
-                
-            sents[j] = " ".join(words)
-        
-        text = " ".join(sents)
-        df.iloc[i]["text"] = text
+    corpus = ['' for _ in range(df.shape[0])]
+    i = 0
+
+    for sample in df.values:
+        for sent in nltk.sent_tokenize(sample[0].lower()):
+            for word in nltk.word_tokenize(sent):
+                corpus[i] += stemmer.stem(word) + ' '
+        i+=1
+
+    df["text"] = corpus
