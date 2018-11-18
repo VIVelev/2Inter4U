@@ -3,7 +3,6 @@ import nltk
 
 __all__ = [
     "standardize",
-    "remove_punct",
     "remove_noise",
     "lemmatize",
     "stem",
