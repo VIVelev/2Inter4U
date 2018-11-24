@@ -10,7 +10,6 @@ nltk = "*"
 gensim = "*"
 spacy = "*"
 flask = "*"
-sqlalchemy = "*"
 pydojoml = "==0.3.4"
 
 [dev-packages]
