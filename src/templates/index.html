@@ -12,9 +12,7 @@
 
       	<div id="userInput">
     		<input id="textInput" type="text" name="msg" placeholder="Message">
-    		<button id="buttonInput">
-				<img width="30px" height="30px" src="/static/mic.png" alt="microphone">
-			</button>
+			<img id="speechInput" src="/static/mic.png" alt="microphone">
       	</div>
 
       	<script>
@@ -45,7 +43,7 @@
         		}
         	});
 
-        	$("#buttonInput").click(function() {
+        	$("#speechInput").click(function() {
 				recognition.start();
 				recognition.onresult = function(event) {
 					getBotResponse(event.results[0][0].transcript);

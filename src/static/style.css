@@ -24,10 +24,9 @@ body {
     font-size: 17px;
 }
 
-#buttonInput {
-    padding: 3px;
-    font-family: monospace;
-    font-size: 17px;
+#speechInput {
+    width: 30px;
+    height: 30px;
 }
 
 .userText {
