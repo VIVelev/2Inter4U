@@ -13,13 +13,17 @@ __all__ = [
     "preprocess",
     "summarize_article",
     "get_named_entities",
+    "get_sentiment",
 ]
 
 if os.getcwd().split('/')[-1] == "2Inter4U":
     with open("./src/static/tfidf.b", mode="rb") as f:
         tf_idf = pickle.load(f)
+
+    with open("./src/static/logistic.b", mode="rb") as f:
+        logistic = pickle.load(f)
 else:
-    print("TF-IDF binary not loaded.")
+    print("TF-IDF && Logistic binary not loaded.")
 
 def preprocess(text):
     return tf_idf.transform(
@@ -35,5 +39,5 @@ def get_named_entities(text):
     doc = spacy_nlp(ner_preprocessing(text))
     return [(x.text, x.label_) for x in doc.ents]
 
-def get_sentiment():
-    pass
+def get_sentiment(text):
+    return logistic.predict_proba(preprocess(text))

@@ -1,5 +1,6 @@
 import re
 import nltk
+import numpy as np
 
 __all__ = [
     "standardize",
@@ -25,7 +26,7 @@ def standardize(data):
         "u": "you",
     }
     
-    corpus = ['' for _ in range(data.shape[0])]
+    corpus = np.array(['' for _ in range(data.shape[0])])
     i = 0
     
     for sample in data:
@@ -60,7 +61,7 @@ def remove_noise(data):
     stop_words = set(nltk.corpus.stopwords.words("english"))
     stop_words.remove("not")
     
-    corpus = ['' for _ in range(data.shape[0])]
+    corpus = np.array(['' for _ in range(data.shape[0])])
     i = 0
 
     for sample in data:
@@ -79,7 +80,7 @@ def remove_noise(data):
 def lemmatize(data):
     lemmatizer = nltk.WordNetLemmatizer()
     
-    corpus = ['' for _ in range(data.shape[0])]
+    corpus = np.array(['' for _ in range(data.shape[0])])
     i = 0
 
     for sample in data:
@@ -94,7 +95,7 @@ def lemmatize(data):
 def stem(data):
     stemmer = nltk.PorterStemmer()
     
-    corpus = ['' for _ in range(data.shape[0])]
+    corpus = np.array(['' for _ in range(data.shape[0])])
     i = 0
 
     for sample in data:

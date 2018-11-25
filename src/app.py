@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from models.nlp import preprocess
+from models.nlp import get_sentiment
 
 app = Flask(__name__)
 
@@ -10,9 +10,7 @@ def home():
 @app.route("/get")
 def get_bot_response():
     userText = request.args.get("msg")
-    X = preprocess(userText)
-    print(X)
-    return "Hello"
+    return str(get_sentiment(userText))
 
 if __name__ == "__main__":
     app.run()
