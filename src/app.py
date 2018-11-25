@@ -45,7 +45,7 @@ def get_bot_response():
         ### Choose the most appropriate page based on previous activity ###
         IS_BOT_TURN = not IS_BOT_TURN
         PREV_PAGE = pages[0]
-        return summarize_article(pages[0].content)
+        return summarize_article(pages[0].content) + "More info here: " + str(pages[0].url)
 
     else:
         IS_BOT_TURN = not IS_BOT_TURN
