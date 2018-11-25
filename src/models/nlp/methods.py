@@ -17,13 +17,13 @@ __all__ = [
 ]
 
 if os.getcwd().split('/')[-1] == "2Inter4U":
-    with open("./src/static/tfidf.b", mode="rb") as f:
+    with open("./src/static/bin/tfidf.b", mode="rb") as f:
         tf_idf = pickle.load(f)
         print('-'*100)
         print("TF-IDF binary loaded successfully.")
         print('-'*100)
 
-    with open("./src/static/logistic.b", mode="rb") as f:
+    with open("./src/static/bin/logistic.b", mode="rb") as f:
         logistic = pickle.load(f)
         print('-'*100)
         print("Logistic binary loaded successfully.")
