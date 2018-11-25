@@ -12,12 +12,21 @@
 
       	<div id="userInput">
     		<input id="textInput" type="text" name="msg" placeholder="Message">
-    		<input id="buttonInput" type="submit" value="Send">
+    		<button id="buttonInput">
+				<img width="30px" height="30px" src="/static/mic.png" alt="microphone">
+			</button>
       	</div>
 
       	<script>
-    		function getBotResponse() {
-    			var rawText = $("#textInput").val();
+			var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+			recognition.lang = 'en-US';
+			recognition.interimResults = false;
+			recognition.maxAlternatives = 5;
+
+    		function getBotResponse(rawText=null) {
+				if (rawText === null) {
+    				rawText = $("#textInput").val();
+				}
 				var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
 				$("#textInput").val("");
 				$("#chatbox").append(userHtml);
@@ -35,8 +44,13 @@
             		getBotResponse();
         		}
         	});
+
         	$("#buttonInput").click(function() {
-      			getBotResponse();
+				recognition.start();
+				recognition.onresult = function(event) {
+					getBotResponse(event.results[0][0].transcript);
+				};
+      			
     		})
 		</script>
 			  

@@ -8,7 +8,7 @@ app = Flask(__name__)
 IS_BOT_TURN = 1
 
 @app.route("/")
-def home():
+def index():
     return render_template("index.html")
 
 @app.route("/get")
@@ -18,7 +18,15 @@ def get_bot_response():
 
     if IS_BOT_TURN:
         search_string = ' '.join([ent[0] for ent in get_named_entities(userText)])
+        print('-'*100)
+        print("SEARCHING FOR:", search_string)
+        print()
+
         page_titles = wikipedia.search(search_string)
+        print("Founded articles:\n")
+        print(page_titles)
+        print('-'*100)
+
         pages = []
         for title in page_titles:
             try:
