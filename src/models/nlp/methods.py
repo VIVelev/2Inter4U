@@ -1,9 +1,12 @@
+import os
+import pickle
+
 import nltk
 import spacy
-import pandas as pd
+import numpy as np
 from gensim.summarization.summarizer import summarize
 
-import nlp
+from .preprocessing import standardize, remove_noise, stem, ner_preprocessing
 spacy_nlp = spacy.load("en_core_web_sm")
 
 __all__ = [
@@ -12,20 +15,16 @@ __all__ = [
     "get_named_entities",
 ]
 
-
-# TODO: Implement TF-IDF
-tf_idf = None
+with open("./src/static/tfidf.b", mode="rb") as f:
+    tf_idf = pickle.load(f)
 
 def preprocess(text):
-    data = pd.DataFrame(
-            [[text, "-"], ["-", "-"]],
-            columns=["text", "label"]
-        )
+    data = np.array([text])
 
-    nlp.standardize(data)
-    nlp.remove_noise(data)
-    nlp.stem(data)
-    X = tf_idf.transform(data["text"])
+    standardize(data)
+    remove_noise(data)
+    stem(data)
+    X = tf_idf.transform(data)
 
     return X
 
@@ -33,5 +32,5 @@ def summarize_article(text):
     return summarize(text, ratio=0.02)
 
 def get_named_entities(a):
-    doc = spacy_nlp(nlp.ner_preprocessing(a))
+    doc = spacy_nlp(ner_preprocessing(a))
     return [(x.text, x.label_) for x in doc.ents]
