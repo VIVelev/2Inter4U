@@ -19,9 +19,12 @@ __all__ = [
 if os.getcwd().split('/')[-1] == "2Inter4U":
     with open("./src/static/tfidf.b", mode="rb") as f:
         tf_idf = pickle.load(f)
+        print("TF-IDF binary loaded successfully.")
 
     with open("./src/static/logistic.b", mode="rb") as f:
         logistic = pickle.load(f)
+        print("Logistic binary loaded successfully.")
+
 else:
     print("TF-IDF && Logistic binary not loaded.")
 
