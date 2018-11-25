@@ -19,14 +19,20 @@ __all__ = [
 if os.getcwd().split('/')[-1] == "2Inter4U":
     with open("./src/static/tfidf.b", mode="rb") as f:
         tf_idf = pickle.load(f)
+        print('-'*100)
         print("TF-IDF binary loaded successfully.")
+        print('-'*100)
 
     with open("./src/static/logistic.b", mode="rb") as f:
         logistic = pickle.load(f)
+        print('-'*100)
         print("Logistic binary loaded successfully.")
+        print('-'*100)
 
 else:
+    print('-'*100)
     print("TF-IDF && Logistic binary not loaded.")
+    print('-'*100)
 
 def preprocess(text):
     return tf_idf.transform(
@@ -36,7 +42,7 @@ def preprocess(text):
     )
 
 def summarize_article(text):
-    return summarize(text, ratio=0.02)
+    return summarize(text, ratio=3e2/len(text))
 
 def get_named_entities(text):
     doc = spacy_nlp(ner_preprocessing(text))

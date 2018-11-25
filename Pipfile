@@ -11,6 +11,7 @@ gensim = "*"
 spacy = "*"
 flask = "*"
 scikit-learn = "*"
+wikipedia = "*"
 
 [dev-packages]
 jupyter = "*"
