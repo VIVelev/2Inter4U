@@ -20,27 +20,25 @@ def standardize(data):
         "'d": "had",
         "luv": "love",
         "pls": "please",
-        "fck": "fuck",
         "thx": "thanks",
         "np": "no problem",
         "u": "you",
     }
     
-    corpus = np.array(['' for _ in range(data.shape[0])])
+    corpus = ['' for _ in range(data.shape[0])]
     i = 0
     
     for sample in data:
-        for sent in nltk.sent_tokenize(sample.lower()):
-            for word in nltk.word_tokenize(sent):
+        for word in nltk.word_tokenize(sample.lower()):
+            if word in lookup_table.keys():
+                corpus[i] += lookup_table[word]
+            else:
+                corpus[i] += word
+            corpus[i] += ' '
 
-                if word in lookup_table.keys():
-                    corpus[i] += lookup_table[word]
-                else:
-                    corpus[i] += word
-                corpus[i] += ' '
         i+=1
 
-    return corpus
+    return np.array(corpus)
 
 
 def _remove_punct(text):
@@ -61,50 +59,46 @@ def remove_noise(data):
     stop_words = set(nltk.corpus.stopwords.words("english"))
     stop_words.remove("not")
     
-    corpus = np.array(['' for _ in range(data.shape[0])])
+    corpus = ['' for _ in range(data.shape[0])]
     i = 0
 
     for sample in data:
-        for sent in nltk.sent_tokenize(sample.lower()):
-            for word in nltk.word_tokenize(sent):
-
-                if word not in stop_words:
-                    corpus[i] += word + ' '
+        for word in nltk.word_tokenize(sample.lower()):
+            if word not in stop_words:
+                corpus[i] += word + ' '
             
         corpus[i] = _remove_punct(corpus[i])
         i+=1
 
-    return corpus
+    return np.array(corpus)
 
 
 def lemmatize(data):
     lemmatizer = nltk.WordNetLemmatizer()
     
-    corpus = np.array(['' for _ in range(data.shape[0])])
+    corpus = ['' for _ in range(data.shape[0])]
     i = 0
 
     for sample in data:
-        for sent in nltk.sent_tokenize(sample.lower()):
-            for word in nltk.word_tokenize(sent):
-                corpus[i] += lemmatizer.lemmatize(word) + ' '
+        for word in nltk.word_tokenize(sample.lower()):
+            corpus[i] += lemmatizer.lemmatize(word) + ' '
         i+=1
 
-    return corpus
+    return np.array(corpus)
 
 
 def stem(data):
     stemmer = nltk.PorterStemmer()
     
-    corpus = np.array(['' for _ in range(data.shape[0])])
+    corpus = ['' for _ in range(data.shape[0])]
     i = 0
 
     for sample in data:
-        for sent in nltk.sent_tokenize(sample.lower()):
-            for word in nltk.word_tokenize(sent):
-                corpus[i] += stemmer.stem(word) + ' '
+        for word in nltk.word_tokenize(sample.lower()):
+            corpus[i] += stemmer.stem(word) + ' '
         i+=1
 
-    return corpus
+    return np.array(corpus)
 
 
 def ner_preprocessing(text):
