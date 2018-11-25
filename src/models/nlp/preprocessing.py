@@ -10,7 +10,7 @@ __all__ = [
 ]
 
 
-def standardize(df):
+def standardize(data):
     lookup_table = {
         "'ve": "have",
         "'re": "are",
@@ -25,11 +25,11 @@ def standardize(df):
         "u": "you",
     }
     
-    corpus = ['' for _ in range(df.shape[0])]
+    corpus = ['' for _ in range(data.shape[0])]
     i = 0
     
-    for sample in df.values:
-        for sent in nltk.sent_tokenize(sample[0].lower()):
+    for sample in data:
+        for sent in nltk.sent_tokenize(sample.lower()):
             for word in nltk.word_tokenize(sent):
 
                 if word in lookup_table.keys():
@@ -39,7 +39,7 @@ def standardize(df):
                 corpus[i] += ' '
         i+=1
 
-    df["text"] = corpus
+    return corpus
 
 
 def _remove_punct(text):
@@ -56,15 +56,15 @@ def _remove_punct(text):
     return text
 
 
-def remove_noise(df):
+def remove_noise(data):
     stop_words = set(nltk.corpus.stopwords.words("english"))
     stop_words.remove("not")
     
-    corpus = ['' for _ in range(df.shape[0])]
+    corpus = ['' for _ in range(data.shape[0])]
     i = 0
 
-    for sample in df.values:
-        for sent in nltk.sent_tokenize(sample[0].lower()):
+    for sample in data:
+        for sent in nltk.sent_tokenize(sample.lower()):
             for word in nltk.word_tokenize(sent):
 
                 if word not in stop_words:
@@ -73,41 +73,41 @@ def remove_noise(df):
         corpus[i] = _remove_punct(corpus[i])
         i+=1
 
-    df["text"] = corpus
+    return corpus
 
 
-def lemmatize(df):
+def lemmatize(data):
     lemmatizer = nltk.WordNetLemmatizer()
     
-    corpus = ['' for _ in range(df.shape[0])]
+    corpus = ['' for _ in range(data.shape[0])]
     i = 0
 
-    for sample in df.values:
-        for sent in nltk.sent_tokenize(sample[0].lower()):
+    for sample in data:
+        for sent in nltk.sent_tokenize(sample.lower()):
             for word in nltk.word_tokenize(sent):
                 corpus[i] += lemmatizer.lemmatize(word) + ' '
         i+=1
 
-    df["text"] = corpus
+    return corpus
 
 
-def stem(df):
+def stem(data):
     stemmer = nltk.PorterStemmer()
     
-    corpus = ['' for _ in range(df.shape[0])]
+    corpus = ['' for _ in range(data.shape[0])]
     i = 0
 
-    for sample in df.values:
-        for sent in nltk.sent_tokenize(sample[0].lower()):
+    for sample in data:
+        for sent in nltk.sent_tokenize(sample.lower()):
             for word in nltk.word_tokenize(sent):
                 corpus[i] += stemmer.stem(word) + ' '
         i+=1
 
-    df["text"] = corpus
+    return corpus
 
 
-def ner_preprocessing(a):
-    tokens = nltk.word_tokenize(a)
+def ner_preprocessing(text):
+    tokens = nltk.word_tokenize(text)
     prepositions = ["about", "in"]
     
     for prep in prepositions:

@@ -15,22 +15,25 @@ __all__ = [
     "get_named_entities",
 ]
 
-with open("./src/static/tfidf.b", mode="rb") as f:
-    tf_idf = pickle.load(f)
+if os.getcwd().split('/')[-1] == "2Inter4U":
+    with open("./src/static/tfidf.b", mode="rb") as f:
+        tf_idf = pickle.load(f)
+else:
+    print("TF-IDF binary not loaded.")
 
 def preprocess(text):
-    data = np.array([text])
-
-    standardize(data)
-    remove_noise(data)
-    stem(data)
-    X = tf_idf.transform(data)
-
-    return X
+    return tf_idf.transform(
+        stem(remove_noise(standardize(
+            np.array([text])
+        )))
+    )
 
 def summarize_article(text):
     return summarize(text, ratio=0.02)
 
-def get_named_entities(a):
-    doc = spacy_nlp(ner_preprocessing(a))
+def get_named_entities(text):
+    doc = spacy_nlp(ner_preprocessing(text))
     return [(x.text, x.label_) for x in doc.ents]
+
+def get_sentiment():
+    pass
