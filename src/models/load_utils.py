@@ -1,27 +1,18 @@
 import pandas as pd
 
 __all__ = [
-    "DIR",
     "text2array",
     "array2df",
     "text2df",
 ]
 
 
-DIR = "/Users/victor/Documents/2Inter4U/data/"
-
-def text2array(file, DIR=DIR, is_yelp=False):
+def text2array(file):
     res = []
-    with open(DIR+file) as f:
-        sents = f.readlines()
-        for sent in sents:
-            label, data = sent.split("\t")
-            
-            if is_yelp:
-                res.append([label, data])
-            else:
-                res.append([data, label])
-        
+    with open(file) as f:
+        for sent in f.readlines():
+            text, label = sent.split("\t")
+            res.append([text, label[0]])
         
     return res
 
