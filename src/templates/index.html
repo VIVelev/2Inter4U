@@ -2,55 +2,15 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="/static/css/style.css">
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    	<script src="/static/js/index.js" defer></script>		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   	</head>
   	<body>
-
-      	<div id="chatbox">
-    		<p class="botText"><span>Hi, what are you interested in?</span></p>
-  		</div>
+    	<p class="botText"><span>Hi, what are you interested in?</span></p>
 
       	<div id="userInput">
     		<input id="textInput" type="text" name="msg" placeholder="Message">
 			<img id="speechInput" src="/static/img/mic.png" alt="microphone">
       	</div>
-
-      	<script>
-			var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
-			recognition.lang = 'en-US';
-			recognition.interimResults = false;
-			recognition.maxAlternatives = 5;
-
-    		function getBotResponse(rawText=null) {
-				if (rawText === null) {
-    				rawText = $("#textInput").val();
-				}
-				var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
-				$("#textInput").val("");
-				$("#chatbox").append(userHtml);
-				
-				  
-				$.get("/get", { msg: rawText })
-					.done(function(data) {
-            			var botHtml = '<p class="botText"><span>' + data + '</span></p>';
-            			$("#chatbox").append(botHtml);
-					});
-			}
-			
-        	$("#textInput").keypress(function(e) {
-        		if(e.which == 13) {
-            		getBotResponse();
-        		}
-        	});
-
-        	$("#speechInput").click(function() {
-				recognition.start();
-				recognition.onresult = function(event) {
-					getBotResponse(event.results[0][0].transcript);
-				};
-      			
-    		})
-		</script>
-			  
   </body>
 </html>

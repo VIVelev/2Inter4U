@@ -9,9 +9,10 @@ victor = Bot("Victor")
 def index():
     return render_template("index.html")
 
-@app.route("/get")
+@app.route("/response")
 def get_bot_response():
-    return victor.response(request.args.get("msg"))
+    response = victor.response(request.args.get("msg"))
+    return render_template("response.html", response=response)
 
 if __name__ == "__main__":
     app.run()
