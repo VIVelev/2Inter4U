@@ -37,7 +37,7 @@ def get_bot_response():
         PREV_PAGE = wikipedia.page(page_titles[0])
 
         log("Summarizing...")
-        return summarize_article(PREV_PAGE.content) + "More info here: " + str(PREV_PAGE.url)
+        return summarize_article(PREV_PAGE.summary) + "More info here: " + str(PREV_PAGE.url)
 
     else:
         IS_BOT_TURN = not IS_BOT_TURN
