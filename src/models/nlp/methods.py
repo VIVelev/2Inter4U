@@ -43,5 +43,9 @@ def get_named_entities(text):
     doc = spacy_nlp(ner_preprocessing(text))
     return [(x.text, x.label_) for x in doc.ents]
 
+def get_nouns(text):
+    pos = nltk.pos_tag(nltk.word_tokenize(text))
+    return [sample[0] for sample in pos if sample[1] == "NN"]
+
 def get_sentiment(text):
     return logistic.predict_proba(preprocess(text))
