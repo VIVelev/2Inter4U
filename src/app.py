@@ -1,3 +1,4 @@
+import random as rnd
 import wikipedia
 from flask import Flask, render_template, request
 
@@ -34,7 +35,17 @@ def get_bot_response():
 
         ### Choose the most appropriate page based on previous activity ###
         IS_BOT_TURN = not IS_BOT_TURN
-        PREV_PAGE = wikipedia.page(page_titles[0])
+
+        log("Loading...")
+        loaded = False
+        while not loaded:
+            try:
+                PREV_PAGE = wikipedia.page(rnd.choice(page_titles))
+                loaded = True
+            except wikipedia.exceptions.DisambiguationError:
+                pass      
+
+        print(PREV_PAGE.categories)
 
         log("Summarizing...")
         return summarize_article(PREV_PAGE.summary) + "More info here: " + str(PREV_PAGE.url)

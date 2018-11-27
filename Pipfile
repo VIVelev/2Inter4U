@@ -9,13 +9,14 @@ pandas = "*"
 nltk = "*"
 gensim = "*"
 spacy = "*"
-flask = "*"
 scikit-learn = "*"
 wikipedia = "*"
+flask = "*"
 
 [dev-packages]
 jupyter = "*"
 pylint = "*"
+v = {editable = true,version = "*"}
 
 [requires]
 python_version = "3.7"
