@@ -32,19 +32,12 @@ def get_bot_response():
         page_titles = wikipedia.search(search_string)
         log("Founded articles:\n", page_titles)
 
-        pages = []
-        for title in page_titles:
-            try:
-                pages.append(wikipedia.page(title))
-            except wikipedia.exceptions.DisambiguationError:
-                return "Can you be more specific, please."
-
         ### Choose the most appropriate page based on previous activity ###
         IS_BOT_TURN = not IS_BOT_TURN
-        PREV_PAGE = pages[0]
+        PREV_PAGE = wikipedia.page(page_titles[0])
 
         log("Summarizing...")
-        return summarize_article(pages[0].content) + "More info here: " + str(pages[0].url)
+        return summarize_article(PREV_PAGE.content) + "More info here: " + str(PREV_PAGE.url)
 
     else:
         IS_BOT_TURN = not IS_BOT_TURN
