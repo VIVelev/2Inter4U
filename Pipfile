@@ -5,18 +5,17 @@ name = "pypi"
 
 [packages]
 numpy = "*"
-pandas = "*"
 nltk = "*"
 gensim = "*"
 spacy = "*"
-scikit-learn = "*"
 wikipedia = "*"
 flask = "*"
 
 [dev-packages]
 jupyter = "*"
 pylint = "*"
-v = {editable = true,version = "*"}
+pandas = "*"
+scikit-learn = "*"
 
 [requires]
 python_version = "3.7"
