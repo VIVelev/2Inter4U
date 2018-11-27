@@ -2,6 +2,7 @@ import wikipedia
 from flask import Flask, render_template, request
 
 from models.nlp import get_named_entities, summarize_article, get_sentiment
+from models.logging import log
 
 ##############################
 IS_BOT_TURN = 1
@@ -26,14 +27,10 @@ def get_bot_response():
         if search_string == '':
             return "I did not get that, can you repeat."
 
-        print('-'*100)
-        print("SEARCHING FOR:", search_string)
-        print()
+        log("SEARCHING FOR:", search_string)
 
         page_titles = wikipedia.search(search_string)
-        print("Founded articles:\n")
-        print(page_titles)
-        print('-'*100)
+        log("Founded articles:\n", page_titles)
 
         pages = []
         for title in page_titles:
@@ -45,15 +42,15 @@ def get_bot_response():
         ### Choose the most appropriate page based on previous activity ###
         IS_BOT_TURN = not IS_BOT_TURN
         PREV_PAGE = pages[0]
+
+        log("Summarizing...")
         return summarize_article(pages[0].content) + "More info here: " + str(pages[0].url)
 
     else:
         IS_BOT_TURN = not IS_BOT_TURN
 
         sentiment = get_sentiment(userText)[0][1]
-        print('-'*100)
-        print(userText, ":", sentiment)
-        print('-'*100)
+        log(userText, ":", sentiment)
 
         if sentiment > .5:
             LIKED_PAGES.append(PREV_PAGE)
