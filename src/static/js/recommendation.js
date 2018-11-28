@@ -9,3 +9,8 @@ $("#btn_back").click(function() {
 		window.location.replace("/?msg="+event.results[0][0].transcript);
 	};
 });
+
+$(".close").click(function() {
+	recognition.stop();
+	window.location.replace('/');
+});

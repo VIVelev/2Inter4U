@@ -23,6 +23,9 @@ class Bot:
         self.pages_stats = {}
         self.prev_page = None
     
+    def page_similarity(self, pageA, pageB):
+        pass
+
     def get_search_string(self, msg):
         search_string = ' '.join([ent[0] for ent in get_named_entities(msg)])
         search_string += ' '
