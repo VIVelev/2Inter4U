@@ -17,12 +17,10 @@ class ResPage:
         self.link = link
 
 class Bot:
-
     def __init__(self, name):
         self.name = name
 
-        self.liked_pages = []
-        self.disliked_pages = []
+        self.pages_stats = {}
         self.prev_page = None
     
     def get_search_string(self, msg):
@@ -61,17 +59,14 @@ class Bot:
     def feedback(self, msg):
         if msg is None:
             return False
+
         sentiment = get_sentiment(msg)[0][1]
         log(msg, ":", sentiment)
+        self.pages_stats[self.prev_page] = sentiment
 
         res = "Thanks for the feedback. I recorder that you "
-
-        if sentiment > .5:
-            self.liked_pages.append(self.prev_page)
-        else:
-            self.disliked_pages.append(self.prev_page)
+        if sentiment < .5:
             res += "do not "
-
         return res + f"like the page: {self.prev_page.title}"
 
     def response(self, msg):
