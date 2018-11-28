@@ -47,9 +47,7 @@ class Bot:
                 self.prev_page = wikipedia.page(rnd.choice(page_titles))
                 loaded = True
             except wikipedia.exceptions.DisambiguationError:
-                pass      
-
-        print(self.prev_page.categories)
+                pass
 
         log("Summarizing...")
         return ResPage(
