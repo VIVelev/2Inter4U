@@ -59,10 +59,12 @@ class Bot:
         )
         
     def feedback(self, msg):
+        if msg is None:
+            return ''
         sentiment = get_sentiment(msg)[0][1]
         log(msg, ":", sentiment)
 
-        res = "Thanks for the feedback. I recorder the you "
+        res = "Thanks for the feedback. I recorder that you "
 
         if sentiment > .5:
             self.liked_pages.append(self.prev_page)

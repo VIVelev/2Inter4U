@@ -7,6 +7,7 @@ victor = Bot("Victor")
 
 @app.route("/")
 def index():
+    victor.feedback(request.args.get("msg"))
     return render_template("index.html")
 
 @app.route("/recommendation")

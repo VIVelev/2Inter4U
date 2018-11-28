@@ -6,6 +6,6 @@ recognition.maxAlternatives = 5;
 $("#btn_back").click(function() {
     recognition.start();
 	recognition.onresult = function(event) {
-		console.log(event.results[0][0].transcript);
+		window.location.replace("/?msg="+event.results[0][0].transcript);
 	};
 });
