@@ -22,4 +22,4 @@ $("#speechInput").click(function() {
 	recognition.onresult = function(event) {
 		getBotResponse(event.results[0][0].transcript);
 	};
-})
+});

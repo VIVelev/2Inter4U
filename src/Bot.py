@@ -52,12 +52,11 @@ class Bot:
         print(self.prev_page.categories)
 
         log("Summarizing...")
-        try:
-            summary = summarize_article(self.prev_page.summary)
-        except ValueError:
-            summary = summarize_article(self.prev_page.content)
-
-        return ResPage(self.prev_page.title, summary, self.prev_page.url)
+        return ResPage(
+            self.prev_page.title,
+            summarize_article(self.prev_page.content),
+            self.prev_page.url
+        )
         
     def feedback(self, msg):
         sentiment = get_sentiment(msg)[0][1]

@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="/static/css/style.css">        
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css">    
+        <link rel="stylesheet" type="text/css" href="/static/css/popup.css">   
+    	<script src="/static/js/recommendation.js" defer></script>  
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>            
   	</head>
   	<body>
-        <a href="/"><p>Go Back</p></a>
+
+        <div class="box">
+            <a id="btn_back" href="#popup1">Go Back</a>
+        </div>
+            
+        <div id="popup1" class="overlay">
+            <div class="popup">
+                <h2>Tell me what you think</h2>
+                <a class="close" href="#">&times;</a>
+                <div class="content">
+                    Did you liked this article?
+                </div>
+            </div>
+        </div>
 
         <div class="container">
             <div class="document">
