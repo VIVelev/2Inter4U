@@ -1,19 +1,13 @@
-.box {
-    width: 40%;
-    margin: 0 auto;
-    background: rgba(255,255,255,0.2);
-    padding: 35px;
-    border: 2px solid #fff;
-    border-radius: 20px/50px;
-    background-clip: padding-box;
-    text-align: center;
-}
-  
 #btn_back {
     font-size: 1em;
+    width: 40%;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
     padding: 10px;
     color: #fff;
-    border: 2px solid #06D85F;
+    background: rgba(216, 6, 6, 0.589);
+    border: 2px solid rgba(216, 6, 6, 0.589);
     border-radius: 20px/50px;
     text-decoration: none;
     cursor: pointer;
@@ -21,9 +15,9 @@
 }
 
 #btn_back:hover {
-    background: #06D85F;
+    width: 60%;
 }
-  
+
 .overlay {
     position: fixed;
     top: 0;
@@ -69,7 +63,7 @@
 }
 
 .popup .close:hover {
-    color: #06D85F;
+    color: rgba(216, 6, 6, 0.589);
 }
 
 .popup .content {
