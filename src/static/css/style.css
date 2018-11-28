@@ -1,16 +1,17 @@
 body {
-    font-family: Garamond;
+    font-family: "Montserrat", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background-color: #fac564;
+    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/5908/food.png");
 }
 
 #userInput {
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
-    margin-top: 60px;
+    width: 100%;
+    margin-top: 10%;
 }
 
 #textInput {
-    width: 87%;
+    width: 100%;
     border: none;
     border-bottom: 3px solid #009688;
     font-family: monospace;
@@ -18,6 +19,107 @@ body {
 }
 
 #speechInput {
-    width: 30px;
-    height: 30px;
+    margin-top: 10%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    height: 20%;
+}
+
+.container {
+    padding: 25px 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.document {
+    background-color: rgba(250,197,100,0.5);
+    padding: 40px 20px;
+    border-radius: 5px;
+}
+
+.document__content {
+    -webkit-column-count: 1;
+    column-count: 1;
+    -webkit-column-gap: 20px;
+    column-gap: 20px;
+    padding: 20px 0;
+    margin: 0 100px;
+}
+
+@media screen and (min-width: 1200px) {
+    .document__content {
+      -webkit-column-count: 2;
+      column-count: 2;
+    }
+}
+
+h1 {
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+p {
+    margin: 0 20px 20px;
+    font-size: 16px;
+    line-height: 1.5em;
+    color: #333;
+}
+
+.brace {
+    width: auto;
+    min-width: 35px;
+    padding-bottom: 20px;
+    font-size: 2em;
+    line-height: 2em;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0 15px 15px;
+    border: none;
+    background-color: transparent;
+    background-image: radial-gradient(circle at 0 0, rgba(255,255,255,0) 14.5px, #fff 15.5px, #fff 19.5px, rgba(255,255,255,0) 20.5px), radial-gradient(circle at 35px 0, rgba(255,255,255,0) 14.5px, #fff 15.5px, #fff 19.5px, rgba(255,255,255,0) 20.5px);
+    background-size: 35px 20px;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    text-transform: lowercase;
+    font-style: italic;
+    color: #fff;
+    -webkit-filter: drop-shadow(0 1px 1px rgba(0,0,0,0.15));
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.15));
+    overflow: visible;
+}
+
+.brace:before {
+    width: 50%;
+    border-top: 5px solid #fff;
+    border-left: 1px solid transparent; /* play with this until you like the look of it */
+    border-top-left-radius: 20% 30px;
+    height: 100%;
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: -15px;
+    box-sizing: border-box;
+    margin-top: -5px;
+}
+
+.brace:after {
+    width: 50%;
+    border-top: 5px solid #fff;
+    border-right: 1px solid transparent; /* play with this until you like the look of it */
+    border-top-right-radius: 20% 30px;
+    height: 100%;
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: -15px;
+    box-sizing: border-box;
+    margin-top: -5px;
 }

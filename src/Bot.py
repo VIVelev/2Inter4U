@@ -10,6 +10,12 @@ from models.nlp import (
 from models.logging import log
 
 
+class ResPage:
+    def __init__(self, title='', summary='', link=''):
+        self.title = title
+        self.summary = summary
+        self.link = link
+
 class Bot:
 
     def __init__(self, name):
@@ -17,7 +23,7 @@ class Bot:
 
         self.liked_pages = []
         self.disliked_pages = []
-        self.prev_page = []
+        self.prev_page = None
     
     def get_search_string(self, msg):
         search_string = ' '.join([ent[0] for ent in get_named_entities(msg)])
@@ -26,7 +32,7 @@ class Bot:
 
         return search_string
 
-    def recommend(self, msg):
+    def recommend_page(self, msg):
         search_string = self.get_search_string(msg)
         log("SEARCHING FOR:", search_string)
 
@@ -51,7 +57,7 @@ class Bot:
         except ValueError:
             summary = summarize_article(self.prev_page.content)
 
-        return summary + "<br>More info here: " + str(self.prev_page.url)
+        return ResPage(self.prev_page.title, summary, self.prev_page.url)
         
     def feedback(self, msg):
         sentiment = get_sentiment(msg)[0][1]
@@ -74,4 +80,4 @@ class Bot:
             else:
                 return "What would you like to know about?"
         else:
-            return self.recommend(msg)
+            return self.recommend_page(msg)

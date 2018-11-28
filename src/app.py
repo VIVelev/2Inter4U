@@ -9,10 +9,10 @@ victor = Bot("Victor")
 def index():
     return render_template("index.html")
 
-@app.route("/response")
-def get_bot_response():
-    response = victor.response(request.args.get("msg"))
-    return render_template("response.html", response=response)
+@app.route("/recommendation")
+def get_bot_recommendation():
+    page = victor.recommend_page(request.args.get("msg"))
+    return render_template("recommendation.html", page=page)
 
 if __name__ == "__main__":
     app.run()

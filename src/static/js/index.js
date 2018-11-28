@@ -8,8 +8,7 @@ function getBotResponse(rawText=null) {
     	rawText = $("#textInput").val();
 	}
 	$("#textInput").val("");
-	console.log(window.URL+"/response?msg="+rawText)
-	window.location.replace(window.URL+"/response?msg="+rawText);
+	window.location.replace("/recommendation?msg="+rawText);
 }
 			
 $("#textInput").keypress(function(e) {

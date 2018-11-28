@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/static/css/style.css">        
+  	</head>
+  	<body>
+        <a href="/"><p>Go Back</p></a>
+
+        <div class="container">
+            <div class="document">
+
+              <h1>Here is what we found about {{ page.title }}</h1>
+              <hr class="brace">
+              
+              <div class="document__content">
+                  <p>{{ page.summary }}</p>
+                  <p>For more info check out here: {{ page.url }}</p>
+              </div>
+              
+            </div>
+        </div>
+  </body>
+</html>
