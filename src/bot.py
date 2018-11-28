@@ -62,7 +62,7 @@ class Bot:
 
         sentiment = get_sentiment(msg)[0][1]
         log(msg, ":", sentiment)
-        self.pages_stats[self.prev_page] = sentiment
+        self.pages_stats[self.prev_page.title] = sentiment
 
         res = "Thanks for the feedback. I recorder that you "
         if sentiment < .5:

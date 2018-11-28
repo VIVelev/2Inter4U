@@ -37,7 +37,7 @@ def preprocess(text):
     )
 
 def summarize_article(text):
-    return summarize(text, ratio=3e2/len(text))
+    return summarize(text, ratio=6e2/len(text))
 
 def get_named_entities(text):
     doc = spacy_nlp(ner_preprocessing(text))
