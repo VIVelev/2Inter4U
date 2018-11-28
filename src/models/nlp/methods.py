@@ -6,7 +6,7 @@ import spacy
 import numpy as np
 from gensim.summarization.summarizer import summarize
 
-from ..logging import log
+from ..log_utils import log
 from .preprocessing import standardize, remove_noise, stem, ner_preprocessing
 spacy_nlp = spacy.load("en_core_web_sm")
 
@@ -16,6 +16,7 @@ __all__ = [
     "get_named_entities",
     "get_sentiment",
 ]
+
 
 if os.getcwd().split('/')[-1] == "2Inter4U":
     with open("./src/static/bin/tfidf.b", mode="rb") as f:

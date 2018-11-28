@@ -33,17 +33,17 @@
         },
         "boto3": {
             "hashes": [
-                "sha256:6d2720ec4b96ead53c6a1401741142209db474b02fda7aac1ad30afd52f17ff1",
-                "sha256:fd566fb6af82667c85783e0c3d1593f0918c52490a1f8e33a2225efb26a50274"
+                "sha256:1c11a2c8a06a313d48e22127f807cd935a6eb3fdca5c60b22e7506109d4f1365",
+                "sha256:96044c66b236cd65d727ec4201b9249f69dcf4a30846620aec8ebf68cbdbf157"
             ],
-            "version": "==1.9.52"
+            "version": "==1.9.54"
         },
         "botocore": {
             "hashes": [
-                "sha256:45dae714e403299608949879f2e39917b7f99ba3b3588853eb31d40fffd48166",
-                "sha256:86c0712e0a5f496d6a252276a98be022af7f718127f30cc503e45e27c2179eb1"
+                "sha256:2c8671bd47e9dc95020c4a0941c2785f1c28ee7f43c878842dbcbe2ed7ca445b",
+                "sha256:b22d5f3bff0efbd46a128348bdd8da9e8745ca4d0a2136f34066cc22a475556d"
             ],
-            "version": "==1.12.52"
+            "version": "==1.12.54"
         },
         "bz2file": {
             "hashes": [
@@ -886,11 +886,11 @@
         },
         "pylint": {
             "hashes": [
-                "sha256:8e645abc9572749f0256f05db86af81ea2e3d583086cc2b73d241a64ecf571b7",
-                "sha256:f70e1b78240ba7fea809ecc00fbfbc51615ab531ef3f76f0548072c732358453"
+                "sha256:689de29ae747642ab230c6d37be2b969bf75663176658851f456619aacf27492",
+                "sha256:771467c434d0d9f081741fec1d64dfb011ed26e65e12a28fe06ca2f61c4d556c"
             ],
             "index": "pypi",
-            "version": "==2.2.1"
+            "version": "==2.2.2"
         },
         "python-dateutil": {
             "hashes": [

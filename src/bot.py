@@ -7,7 +7,7 @@ from models.nlp import (
     summarize_article,
     get_sentiment,
 )
-from models.logging import log
+from models.log_utils import log
 
 
 class ResPage:
