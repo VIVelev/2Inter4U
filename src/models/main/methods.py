@@ -6,7 +6,7 @@ import spacy
 import numpy as np
 from gensim.summarization.summarizer import summarize
 
-from ..log_utils import log
+from .log_utils import log
 from .preprocessing import standardize, remove_noise, stem, ner_preprocessing
 spacy_nlp = spacy.load("en_core_web_sm")
 

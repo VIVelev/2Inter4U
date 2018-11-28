@@ -1,13 +1,14 @@
 import random as rnd
 import wikipedia
 
-from models.nlp import (
+from models.main import (
     get_named_entities,
     get_nouns,
     summarize_article,
     get_sentiment,
+
+    log,
 )
-from models.log_utils import log
 
 
 class ResPage:
