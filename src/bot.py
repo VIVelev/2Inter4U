@@ -34,6 +34,8 @@ class Bot:
 
     def recommend_page(self, msg):
         search_string = self.get_search_string(msg)
+        if search_string == ' ':
+            return False
         log("SEARCHING FOR:", search_string)
 
         page_titles = wikipedia.search(search_string)
@@ -58,7 +60,7 @@ class Bot:
         
     def feedback(self, msg):
         if msg is None:
-            return ''
+            return False
         sentiment = get_sentiment(msg)[0][1]
         log(msg, ":", sentiment)
 

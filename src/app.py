@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from bot import Bot
 
 
@@ -13,6 +13,8 @@ def index():
 @app.route("/recommendation")
 def get_bot_recommendation():
     page = victor.recommend_page(request.args.get("msg"))
+    if not page:
+        return redirect("/")
     return render_template("recommendation.html", page=page)
 
 if __name__ == "__main__":
