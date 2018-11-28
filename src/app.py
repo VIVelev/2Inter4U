@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from Bot import Bot
+from bot import Bot
 
 
 app = Flask(__name__)
