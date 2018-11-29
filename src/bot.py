@@ -1,7 +1,7 @@
 import random as rnd
 import wikipedia
 
-from dojo.linear import LinearRegression
+from sklearn.linear_model import LinearRegression
 
 from models.main import (
     get_named_entities,
@@ -28,9 +28,10 @@ class Bot:
         self.prev_page = None
     
     def calc_page_score(self, page2analyze):
-        wiki_pages = [wikipedia.page(title) for title in self.pages_score.keys()]
+        stored_wiki_pages = [wikipedia.page(title) for title in self.pages_score.keys()]
         X = [
-            [len(get_named_entities(page.content)), len(get_nouns(page.content))] for page in wiki_pages
+            [len(get_named_entities(page.content)),
+            len(get_nouns(page.content))] for page in stored_wiki_pages
         ]
         y = self.pages_score.values()
 
@@ -62,6 +63,7 @@ class Bot:
         while not loaded:
             try:
                 self.prev_page = wikipedia.page(rnd.choice(page_titles))
+                # if self.calc_page_score(self.prev_page) > .2:
                 loaded = True
             except wikipedia.exceptions.DisambiguationError:
                 pass

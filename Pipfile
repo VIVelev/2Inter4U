@@ -10,12 +10,12 @@ gensim = "*"
 spacy = "*"
 wikipedia = "*"
 flask = "*"
+scikit-learn = "*"
 
 [dev-packages]
 jupyter = "*"
 pylint = "*"
 pandas = "*"
-pydojoml = "==0.3.5"
 
 [requires]
 python_version = "3.7"
