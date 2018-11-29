@@ -15,7 +15,7 @@ flask = "*"
 jupyter = "*"
 pylint = "*"
 pandas = "*"
-scikit-learn = "*"
+pydojoml = "==0.3.5"
 
 [requires]
 python_version = "3.7"
