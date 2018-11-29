@@ -29,6 +29,9 @@ class Bot:
     
     def calc_page_score(self, page2analyze):
         stored_wiki_pages = [wikipedia.page(title) for title in self.pages_score.keys()]
+        if len(stored_wiki_pages) < 3:
+            return 1
+            
         X = [
             [len(get_named_entities(page.content)),
             len(get_nouns(page.content))] for page in stored_wiki_pages
@@ -62,9 +65,9 @@ class Bot:
         loaded = False
         while not loaded:
             try:
-                self.prev_page = wikipedia.page(rnd.choice(page_titles))
-                # if self.calc_page_score(self.prev_page) > .2:
-                loaded = True
+                self.prev_page = wikipedia.page(rnd.choice(page_titles[:3]))
+                if self.calc_page_score(self.prev_page) > .2:
+                    loaded = True
             except wikipedia.exceptions.DisambiguationError:
                 pass
 
