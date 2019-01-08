@@ -66,7 +66,7 @@ class Bot:
         while not loaded:
             try:
                 self.prev_page = wikipedia.page(rnd.choice(page_titles[:3]))
-                if self.calc_page_score(self.prev_page) > .2:
+                if self.calc_page_score(self.prev_page) > .5:
                     loaded = True
             except wikipedia.exceptions.DisambiguationError:
                 pass
@@ -99,3 +99,4 @@ class Bot:
                 return "What would you like to know about?"
         else:
             return self.recommend_page(msg)
+ 
